@@ -75,13 +75,56 @@
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     }
+
+    .menu-setting {
+        font-size: 20px;
+        font-weight: bold;
+        border-bottom: 1px solid black;
+    }
+
+    .menu-setting .active {
+        background-color: #DEE3E2;
+        border: 1px solid black;
+    }
+
+    .menu-setting *:not(:last-child) {
+        cursor: pointer;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .menu-setting *:not(:last-child):hover {
+        color: white;
+        background-color: gray !important;
+        border: 1px solid black;
+    }
+
+    @media only screen and (max-width: 800px) {
+        .menu-setting {
+            display: inline !important;
+        }
+
+        .menu-setting * {
+            width: 100% !important;
+        }
+
+        .menu-setting div:nth-child(2) {
+            border-radius: 0 0 10px 10px;
+        }
+
+        .menu-setting *:last-child {
+            margin-top: 10px !important;
+            width: 100% !important;
+            float: none !important;
+        }
+    }
     </style>
 </head>
 
 <body>
 
     <div class="ui sidebar inverted vertical menu">
-        <div class="Logo-camp text-center mb-3" style="cursor: pointer" onclick="window.location.href = '<?= base_url(); ?>'" >
+        <div class="Logo-camp text-center mb-3" style="cursor: pointer"
+            onclick="window.location.href = '<?= base_url(); ?>'">
             <img src="https://se.buu.ac.th/gami_ossd/assets/dist/img/cluster/cluster4.png" style="width: 100px;">
             <h5>OSSD CAMP #10</h5>
         </div>
@@ -91,7 +134,7 @@
                 Dashboard
             </h5>
         </a>
-        <a class="item" href="<?= base_url(); ?>index.php/C_Shopping/show_Shopping">
+        <a class="item" href="<?= base_url(); ?>index.php/C_Shopping/show_shopping">
             <h5>
                 <i class="shopping cart icon"></i>
                 Shopping
@@ -100,26 +143,26 @@
 
         <?php if($_SESSION['user']->role == 'admin' || $_SESSION['user']->role == 'พี่เลี้ยง'){ ?>
 
-            <a class="item" href="<?= base_url(); ?>index.php/C_Assess/show_assess">
-                <h5>
-                    <i class="clipboard list icon"></i>
-                    Assess
-                </h5>
-            </a>
+        <a class="item" href="<?= base_url(); ?>index.php/C_Assess/show_assess">
+            <h5>
+                <i class="clipboard list icon"></i>
+                Assess
+            </h5>
+        </a>
 
-            <?php if($_SESSION['user']->role == 'admin'){ ?>
+        <?php if($_SESSION['user']->role == 'admin'){ ?>
 
-                <a class="item" href="<?= base_url(); ?>index.php/C_Setting/show_setting">
-                    <h5>
-                        <i class="cog icon"></i>
-                        Setting
-                    </h5>
-                </a>
-
-            <?php } ?>
+        <a class="item" href="<?= base_url(); ?>index.php/C_Setting/show_setting">
+            <h5>
+                <i class="cog icon"></i>
+                Setting
+            </h5>
+        </a>
 
         <?php } ?>
-        
+
+        <?php } ?>
+
     </div>
 
     <div class="pusher">
@@ -143,7 +186,7 @@
                 <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">
                 </img>
                 <div class="btn-logout text-center transition hidden">
-                    <a class="ui red button m-0" href="<?= base_url(); ?>index.php/C_Login/logout" > LOGOUT </a>
+                    <a class="ui red button m-0" href="<?= base_url(); ?>index.php/C_Login/logout"> LOGOUT </a>
                 </div>
             </div>
         </div>
@@ -160,14 +203,14 @@
 
         <script>
         $('.ui.avatar').on('click', function() {
-            if($('.btn-logout').hasClass('visible') == 0)
+            if ($('.btn-logout').hasClass('visible') == 0)
                 $('.btn-logout').transition('slide down');
         });
 
         $("body").click(
             function(e) {
                 if (e.target.className !== ".ui.avatar" && $('.btn-logout').hasClass('visible')) {
-                        $('.btn-logout').transition('slide down');
+                    $('.btn-logout').transition('slide down');
                 }
             }
         );

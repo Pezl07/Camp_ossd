@@ -56,28 +56,6 @@ td.right {
     text-align: center !important;
 }
 
-.menu-setting {
-    font-size: 20px;
-    font-weight: bold;
-    border-bottom: 1px solid black;
-}
-
-.menu-setting .active {
-    background-color: #DEE3E2;
-    border: 1px solid black;
-}
-
-.menu-setting *:not(:last-child) {
-    cursor: pointer;
-    border-radius: 10px 10px 0 0;
-}
-
-.menu-setting *:not(:last-child):hover {
-    color: white;
-    background-color: gray !important;
-    border: 1px solid black;
-}
-
 .action-ac .btn {
     width: 45%;
     height: 70px;
@@ -92,23 +70,6 @@ td.right {
 }
 
 @media only screen and (max-width: 800px) {
-    .menu-setting {
-        display: inline !important;
-    }
-
-    .menu-setting * {
-        width: 100% !important;
-    }
-
-    .menu-setting div:nth-child(2) {
-        border-radius: 0 0 10px 10px;
-    }
-
-    .menu-setting *:last-child {
-        margin-top: 10px !important;
-        width: 100% !important;
-        float: none !important;
-    }
 
     tr {
         margin: 20px;
