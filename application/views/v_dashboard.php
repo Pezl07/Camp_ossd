@@ -95,31 +95,31 @@ var data_bar_chart = [{
     showInLegend: false,
     dataLabels: default_formatter,
     data: [{
-            y: <?php echo 0//echo $cluster[0]->cst_total_score ?>
+            y: <?php echo $team[0]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[1]->cst_total_score ?>
+            y: <?php echo $team[1]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[2]->cst_total_score ?>
+            y: <?php echo $team[2]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[3]->cst_total_score ?>
+            y: <?php echo $team[3]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[4]->cst_total_score ?>
+            y: <?php echo $team[4]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[5]->cst_total_score ?>
+            y: <?php echo $team[5]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[6]->cst_total_score ?>
+            y: <?php echo $team[6]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[7]->cst_total_score ?>
+            y: <?php echo $team[7]->score ?>
         },
         {
-            y: <?php echo 0//echo $cluster[8]->cst_total_score ?>
+            y: <?php echo $team[8]->score ?>
         }
 
     ]

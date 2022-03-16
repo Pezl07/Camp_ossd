@@ -7,10 +7,22 @@ class C_Dashboard extends Camp_controller {
 
     function show_dashboard($type_id = NULL) {
 
-		if(isset($type_id)){
+		$data['team'] = [];
+		if(isset($type_id) && $type_id != 'ALL'){
 			$data['type_id'] = $type_id;
+
+			$teams = $this->M_team->get_team_list();
+
+			foreach($teams as $team){
+				array_push($data['team'], $team);
+			}
 		}else{
 			$data['type_id'] = "ALL";
+			$teams = $this->M_team->get_team_list();
+
+			foreach($teams as $team){
+				array_push($data['team'], $team);
+			}
 		}
 
 		$data['activity_types'] = $this->M_activity_type->get_activity_type_list();
