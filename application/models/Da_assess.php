@@ -13,7 +13,7 @@ class Da_assess extends CI_Model {
 		$this->conn = $this->mongodb->getConn();
 	}
 
-	function insert($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $score = NULL) {
+	function insert($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $user_id = NULL, $score = NULL) {
 
 		try {
 			$assess = array(
@@ -21,6 +21,7 @@ class Da_assess extends CI_Model {
 				'date' => $date, 
 				'ac_name' => $ac_name,
 				'type' => $type,
+				'user_id' => $user_id,
 				'score' => intval($score)
 			);
 
@@ -40,10 +41,10 @@ class Da_assess extends CI_Model {
 		
 	}
 
-	function update($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL,$score = NULL) {
+	function update($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $user_id = NULL, $score = NULL) {
 		try {
 			$query = new MongoDB\Driver\BulkWrite();
-			$query->update(['team' => $team, 'date' => $date, 'ac_name' => $ac_name, 'type' => $type], 
+			$query->update(['team' => $team, 'date' => $date, 'ac_name' => $ac_name, 'type' => $type, 'user_id' => $user_id], 
 						['$set' => array('score' => intval($score))]);
 
 			$result = $this->conn->executeBulkWrite($this->database.'.'.$this->collection, $query);

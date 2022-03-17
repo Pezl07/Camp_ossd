@@ -5,9 +5,9 @@ require dirname(__FILE__) . '/Da_assess.php';
 
 class M_assess extends Da_assess {
 	
-	function get_assess_list() {
+	function get_assess_list($user_id = NULL) {
 		try {
-			$filter = [];
+			$filter = ['user_id' => $user_id];
 			$query = new MongoDB\Driver\Query($filter);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
@@ -18,9 +18,9 @@ class M_assess extends Da_assess {
 		}
 	}
 
-	function get_assess_list_by_type($type = NULL) {
+	function get_assess_list_by_type($type = NULL, $user_id = NULL) {
 		try {
-			$filter = ['type' => $type];
+			$filter = ['type' => $type, 'user_id' => $user_id];
 			$query = new MongoDB\Driver\Query($filter);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
