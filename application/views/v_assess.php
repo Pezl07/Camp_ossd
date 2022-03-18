@@ -62,14 +62,27 @@ td.right {
 <div class="rate-container mx-5">
 
     <div class="div">
-        <select class="ui dropdown type_id">
-            <option value="ALL" <?php if($type_id == "ALL") {echo "selected";}; ?> >ALL</option>
-            <?php foreach ($activity_types as $activity_type){ ?>
-                <option value="<?php echo $activity_type->_id ?>" <?php if($type_id == $activity_type->_id) {echo "selected";}; ?> >
-                    <?php echo $activity_type->type_name ?>
-                </option>
-            <?php } ?>
-        </select>
+
+        <?php if($_SESSION['user']->role != 'admin'){ ?>
+
+            <select class="ui dropdown type_id">
+                <option value="ALL" <?php if($type_id == "ALL") {echo "selected";}; ?> >ALL</option>
+                <?php foreach ($activity_types as $activity_type){ ?>
+                    <?php if($activity_type->type_name != 'Admin'){ ?>
+                        <option value="<?php echo $activity_type->_id ?>" <?php if($type_id == $activity_type->_id) {echo "selected";}; ?> >
+                            <?php echo $activity_type->type_name ?>
+                        </option>
+                    <?php } ?>
+                <?php } ?>
+            </select>
+
+        <?php }else{ ?>
+
+            <select class="ui dropdown type_id">
+                <option value="62342aa328e2c98b0115edd0" selected>Admin</option>
+            </select>
+
+        <?php } ?>
 
         <select class="ui dropdown day">
             <?php for($i = 7; $i <= 14; $i++){ ?>

@@ -141,7 +141,7 @@
             </h5>
         </a>
 
-        <?php if($_SESSION['user']->role == 'admin' || $_SESSION['user']->role == 'พี่เลี้ยง'){ ?>
+        <?php if($_SESSION['user']->role == 'admin'|| $_SESSION['user']->role == 'พี่เลี้ยง'){ ?>
 
         <a class="item" href="<?= base_url(); ?>index.php/C_Assess/show_assess">
             <h5>
@@ -149,6 +149,8 @@
                 Assess
             </h5>
         </a>
+
+        <?php } ?>
 
         <?php if($_SESSION['user']->role == 'admin'){ ?>
 
@@ -158,8 +160,6 @@
                 Setting
             </h5>
         </a>
-
-        <?php } ?>
 
         <?php } ?>
 
@@ -180,7 +180,7 @@
                         <?php echo $_SESSION['user']->name; ?>
                     </div>
                     <div class="item">
-                        ตำแหน่ง : <?php echo $_SESSION['user']->role .' '. $_SESSION['user']->team; ?>
+                        ตำแหน่ง : <?php echo $_SESSION['user']->role; if($_SESSION['user']->role != 'admin') echo ' มกุล '. $_SESSION['user']->team; ?>
                     </div>
                 </div>
                 <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">

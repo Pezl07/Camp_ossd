@@ -6,12 +6,21 @@ require dirname(__FILE__) . '/Camp_controller.php';
 class C_Assess extends Camp_controller {
 
     function show_assess($type_id = NULL, $day = NULL) {
-		if($_SESSION['user']->role == 'admin'){
+		if($_SESSION['user']->role == 'admin' || $_SESSION['user']->role == 'พี่เลี้ยง'){
 
-			if(isset($type_id)){
-				$data['type_id'] = $type_id;
+			
+			if($_SESSION['user']->role == 'admin'){
+
+				$data['type_id'] = '62342aa328e2c98b0115edd0';
+
 			}else{
-				$data['type_id'] = "ALL";
+
+				if(isset($type_id)){
+					$data['type_id'] = $type_id;
+				}else{
+					$data['type_id'] = "ALL";
+				}
+
 			}
 
 			if(isset($day)){
