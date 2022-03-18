@@ -1,7 +1,7 @@
 <style>
-    .max-score-ac .input input{
-        width: 200px;
-    }
+.max-score-ac .input input {
+    width: 200px;
+}
 </style>
 
 <div class="menu-setting d-flex mb-5">
@@ -41,25 +41,28 @@
 
 </div>
 
+<?php $count = 0 ?>
+
 <div class="rate-form mt-4">
     <table class="ui celled table">
         <thead>
             <tr>
                 <th class="center aligned">ชื่อ Activities</th>
-                
+
                 <?php if($type_id == 'ALL'){ ?>
-                    <th class="center aligned" style="width: 30%">ประเภท</th>
+                <th class="center aligned" style="width: 30%">ประเภท</th>
                 <?php } ?>
-                
+
                 <th class="center aligned">คะแนนเต็ม</th>
                 <th class="center aligned"></th>
             </tr>
         </thead>
         <tbody>
-            <tr id="ac_1">
+            <?php foreach ($activities as $activity) {?>
+            <tr id="ac_<?php echo $activity->_id ?>">
                 <td class="center aligned">
                     <div class="name-ac">
-                        Daily
+                        <?php echo $activity->ac_name ?>
                     </div>
                 </td>
 
@@ -67,7 +70,7 @@
 
                 <td class="center aligned type">
                     <div class="type-ac">
-                        Scrum Lover
+                        <?php echo $activity_type->type ?>
                     </div>
                 </td>
 
@@ -75,50 +78,30 @@
 
                 <td class="center aligned score">
                     <div class="max-score-ac">
-                        1000
+                        <?php echo $activity_type->max_score ?>
                     </div>
                 </td>
                 <td class="right aligned action-ac">
-                    <button class="btn btn-warning" onclick="edit_row('<?php echo 1 ?>')"><i class="edit outline icon"></i></button>
+                    <button class="btn btn-warning" onclick="edit_row('<?php echo $activity->_id ?>')"><i
+                            class="edit outline icon"></i></button>
                     <button class="btn btn-danger"><i class="trash alternate outline icon"></i></button>
                 </td>
             </tr>
-            <tr id="ac_2">
-                <td class="center aligned">
-                    <div class="name-ac">
-                        Task Done
-                    </div>
-                </td>
-
-                <?php if($type_id == 'ALL'){ ?>
-
-                <td class="center aligned type">
-                    <div class="type-ac">
-                        Soft Skill
-                    </div>
-                </td>
-
-                <?php } ?>
-
-                <td class="center aligned score">
-                    <div class="max-score-ac">
-                        1000
-                    </div>
-                </td>
-                <td class="right aligned action-ac">
-                    <button class="btn btn-warning" onclick="edit_row('<?php echo 2 ?>')"><i class="edit outline icon"></i></button>
-                    <button class="btn btn-danger"><i class="trash alternate outline icon"></i></button>
-                </td>
-            </tr>
+            <?php $count++; } ?>
         </tbody>
     </table>
 </div>
 
 
 <script>
+var undo_edit;
+var ac_type;
 
-$( document ).ready(function() {
+$(document).ready(function() {
     get_types();
+    <?php if($count == 0){ ?>
+        $('.ui.blue.button').click();
+    <?php } ?>
 });
 
 $('.type_id, .day').on('change', function() {
@@ -128,25 +111,21 @@ $('.type_id, .day').on('change', function() {
         type_id + '/' + day;
 });
 
-var undo_edit;
-var ac_type;
-
-function get_types(){
+function get_types() {
     $.ajax({
-            url: '<?php echo base_url() . 'index.php/C_Setting/get_activity_type_ajax' ?>',
-            dataType: 'JSON',
-            success: function(data) {
-                ac_type = data;
-            }
+        url: '<?php echo base_url() . 'index.php/C_Setting/get_activity_type_ajax' ?>',
+        dataType: 'JSON',
+        async: false,
+        success: function(data) {
+            ac_type = data;
+        }
     });
 }
 
 function add_row() {
-    if($('td:eq(0)').hasClass('add')){
+    if ($('td:eq(0)').hasClass('add')) {
         return;
     }
-
-    console.log(ac_type);
 
     var input = `   <tr id="add">
                         <td class="center aligned add">
@@ -165,19 +144,19 @@ function add_row() {
                         <select class="ui dropdown type_id" style="width: 100%; height: 100%">
             `;
 
-        for(var i = 0; i < ac_type.length; i++){
-            input +=    `   <option value="${ac_type[i]._id}">
+    for (var i = 0; i < ac_type.length; i++) {
+        input += `   <option value="${ac_type[i]._id}">
                                 ${ac_type[i].type_name}
                             </option>
                         `;
-        }
+    }
 
     input += `</select>
                     </div>
                 </td> `;
     <?php } ?>
 
-    input   += `
+    input += `
                 <td class="center aligned score">
                     <div class="max-score-ac">
                         <div class="ui input">
@@ -193,11 +172,11 @@ function add_row() {
     $('tbody').prepend(input);
 }
 
-function edit_row(ac_id){
-    var name_ac = $('#ac_'+ac_id+' td .name-ac')[0].innerText;
-    var max_score = $('#ac_'+ac_id+' td .max-score-ac')[0].innerText;
-    var type_ac = $('#ac_'+ac_id+' td .type-ac')[0].innerText;
-    
+function edit_row(ac_id) {
+    var name_ac = $('#ac_' + ac_id + ' td .name-ac')[0].innerText;
+    var max_score = $('#ac_' + ac_id + ' td .max-score-ac')[0].innerText;
+    var type_ac = $('#ac_' + ac_id + ' td .type-ac')[0].innerText;
+
     var input = `   
                     <td class="center aligned add">
                         <div class="name-ac">
@@ -208,28 +187,28 @@ function edit_row(ac_id){
                     </td>`;
 
     <?php if($type_id == 'ALL'){ ?>
-        input += `<td class="center aligned type" >
+    input += `<td class="center aligned type" >
                     <div class="type-ac">
                         <select class="ui dropdown type_id" style="width: 100%; height: 100%">
             `;
 
-        for(var i = 0; i < ac_type.length; i++){
-            input +=    `   <option value="${ac_type[i]._id}" `;
-            
-            if(type_ac == ac_type[i].type_name) 
-                input += "selected";
-            
-            input +=    `>
+    for (var i = 0; i < ac_type.length; i++) {
+        input += `   <option value="${ac_type[i]._id}" `;
+
+        if (type_ac == ac_type[i].type_name)
+            input += "selected";
+
+        input += `>
                                 ${ac_type[i].type_name}
                             </option>
                         `;
-        }
+    }
 
-        input += `</select>
+    input += `</select>
                         </div>
                     </td> `;
     <?php } ?>
-    
+
     input += `                
                     <td class="center aligned score">
                         <div class="max-score-ac">
@@ -244,13 +223,13 @@ function edit_row(ac_id){
                     </td>
                 `;
 
-    undo_edit = $('#ac_'+ac_id).html(); 
-    $('#ac_'+ac_id+' *').remove();
-    $('#ac_'+ac_id).prepend(input);
+    undo_edit = $('#ac_' + ac_id).html();
+    $('#ac_' + ac_id + ' *').remove();
+    $('#ac_' + ac_id).prepend(input);
 }
 
-function cancel_edit_row(ac_id){
-    $('#ac_'+ac_id+' *').remove();
-    $('#ac_'+ac_id).prepend(undo_edit);
+function cancel_edit_row(ac_id) {
+    $('#ac_' + ac_id + ' *').remove();
+    $('#ac_' + ac_id).prepend(undo_edit);
 }
 </script>

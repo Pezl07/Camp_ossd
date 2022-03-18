@@ -25,7 +25,7 @@ class C_Setting extends Camp_controller {
 			$data['activity_types'] = $this->M_activity_type->get_activity_type_list();
 			
 			if($page == 2){
-				$data['activities'] = '';
+				$data['activities'] = $this->M_activity->get_activity_list($data['day'], $data['type_id']);
 			}
 
 			// echo "<pre>"; print_r($data); echo "</pre>";

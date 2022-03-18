@@ -54,7 +54,7 @@ td.right {
     text-align: right !important;
 }
 
-.ui.green.button{
+.ui.green.button {
     font-size: 20px;
 }
 </style>
@@ -65,42 +65,47 @@ td.right {
 
         <?php if($_SESSION['user']->role != 'admin'){ ?>
 
-            <select class="ui dropdown type_id">
-                <option value="ALL" <?php if($type_id == "ALL") {echo "selected";}; ?> >ALL</option>
-                <?php foreach ($activity_types as $activity_type){ ?>
-                    <?php if($activity_type->type_name != 'Admin'){ ?>
-                        <option value="<?php echo $activity_type->_id ?>" <?php if($type_id == $activity_type->_id) {echo "selected";}; ?> >
-                            <?php echo $activity_type->type_name ?>
-                        </option>
-                    <?php } ?>
-                <?php } ?>
-            </select>
+        <select class="ui dropdown type_id">
+            <option value="ALL" <?php if($type_id == "ALL") {echo "selected";}; ?>>ALL</option>
+            <?php foreach ($activity_types as $activity_type){ ?>
+            <?php if($activity_type->type_name != 'Admin'){ ?>
+            <option value="<?php echo $activity_type->_id ?>"
+                <?php if($type_id == $activity_type->_id) {echo "selected";}; ?>>
+                <?php echo $activity_type->type_name ?>
+            </option>
+            <?php } ?>
+            <?php } ?>
+        </select>
 
         <?php }else{ ?>
 
-            <select class="ui dropdown type_id">
-                <option value="62342aa328e2c98b0115edd0" selected>Admin</option>
-            </select>
+        <select class="ui dropdown type_id">
+            <option value="62342aa328e2c98b0115edd0" selected>Admin</option>
+        </select>
 
         <?php } ?>
 
         <select class="ui dropdown day">
             <?php for($i = 7; $i <= 14; $i++){ ?>
-                <?php if($i < 10){ ?>
-                    <option value="2022-03-0<?php echo $i ?>" <?php if(isset($day) && $day == "2022-03-0".$i) {echo "selected";}; ?> >
-                        วันที่ <?php echo $i ?> เมษายน 2565
-                    </option>
-                <?php }else{ ?>
-                    <option value="2022-03-<?php echo $i ?>" <?php if(isset($day) && $day == "2022-03-".$i) {echo "selected";}; ?> >
-                        วันที่ <?php echo $i ?> เมษายน 2565
-                    </option>
-                <?php } ?>
+            <?php if($i < 10){ ?>
+            <option value="2022-03-0<?php echo $i ?>"
+                <?php if(isset($day) && $day == "2022-03-0".$i) {echo "selected";}; ?>>
+                วันที่ <?php echo $i ?> เมษายน 2565
+            </option>
+            <?php }else{ ?>
+            <option value="2022-03-<?php echo $i ?>"
+                <?php if(isset($day) && $day == "2022-03-".$i) {echo "selected";}; ?>>
+                วันที่ <?php echo $i ?> เมษายน 2565
+            </option>
+            <?php } ?>
 
             <?php } ?>
         </select>
 
         <button class="ui green button float-end"> บันทึก </button>
     </div>
+
+    <?php $count = 0 ?>
 
     <div class="rate-form mt-5">
         <table class="ui celled table">
@@ -111,44 +116,47 @@ td.right {
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <?php foreach ($activities as $activity) {?>
+                <tr id="ac_<?php echo $activity->_id ?>">
                     <td class="center aligned">
                         <div class="name-ac">
-                            Daily
+                            <?php echo $activity->ac_name ?>
                         </div>
                     </td>
                     <td class="right aligned">
                         <div class="input-ac">
                             <div class="ui transparent input">
-                                <input type="text" placeholder="/1000">
+                                <input type="text" placeholder="/1000" value="<?php echo $activity->score ?>"
+                                    max="<?php echo $activity->max_score ?>" min="0">
                             </div>
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="center aligned">
-                        <div class="name-ac">
-                            Task Done
-                        </div>
-                    </td>
-                    <td class="right aligned">
-                        <div class="input-ac">
-                            <div class="ui transparent input">
-                                <input type="text" placeholder="/100">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                <?php $count++; } ?>
             </tbody>
         </table>
+        <?php if($count == 0){ ?>
+        <div class="ui message text-center">
+            <div class="header">
+                ไม่มีการกิจกรรมในระบบ
+            </div>
+            <p></p>
+        </div>
+        <style>
+            table {
+                display: none;
+            }
+        </style>
+        <?php } ?>
     </div>
 
 </div>
 
 <script>
-    $('.type_id, .day').on('change', function() {
-        var type_id = $('.type_id').val();
-        var day = $('.day').val();
-        window.location.href = '<?php echo base_url(); ?>' + 'index.php/C_Assess/show_assess/' + type_id + '/' + day;
-    });
+$('.type_id, .day').on('change', function() {
+    var type_id = $('.type_id').val();
+    var day = $('.day').val();
+    window.location.href = '<?php echo base_url(); ?>' + 'index.php/C_Assess/show_assess/' + type_id + '/' +
+        day;
+});
 </script>

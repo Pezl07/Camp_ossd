@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Da_assess extends CI_Model {
+class Da_activity extends CI_Model {
 
     protected $database = 'Camp_Ossd';
-	protected $collection = 'assess';
+	protected $collection = 'activity';
 	protected $conn ;
 
 	function __construct() {
@@ -13,21 +13,18 @@ class Da_assess extends CI_Model {
 		$this->conn = $this->mongodb->getConn();
 	}
 
-	function insert($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $user_id = NULL, $max_score = NULL, $score = NULL) {
+	function insert($ac_name = NULL, $type = NULL, $date = NULL, $max_score = NULL) {
 
 		try {
-			$assess = array(
-				'team' => $team, 
-				'date' => $date, 
-				'ac_name' => $ac_name,
-				'type' => $type,
-				'user_id' => $user_id,
-				'max_score' => intval($max_score),
-				'score' => intval($score)
+			$activity = array(
+				'ac_name' => $ac_name, 
+				'type' => $type, 
+				'date' => $date,
+				'max_score' => intval($max_score)
 			);
 
 			$query = new MongoDB\Driver\BulkWrite();
-			$query->insert($assess);
+			$query->insert($activity);
 
 			$result = $this->conn->executeBulkWrite($this->database.'.'.$this->collection, $query);
 
@@ -37,16 +34,15 @@ class Da_assess extends CI_Model {
 
 			return FALSE;
 		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
-			show_error('Error while updating assess: ' . $ex->getMessage(), 500);
+			show_error('Error while updating activity: ' . $ex->getMessage(), 500);
 			}
 		
 	}
 
-	function update($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $user_id = NULL, $max_score = NULL, $score = NULL) {
+	function update($id = NULL, $ac_name = NULL, $type = NULL, $max_score = NULL) {
 		try {
 			$query = new MongoDB\Driver\BulkWrite();
-			$query->update(['team' => $team, 'date' => $date, 'ac_name' => $ac_name, 'type' => $type, 'user_id' => new MongoDB\BSON\ObjectId($user_id)], 
-						['$set' => array('max_score' => intval($max_score), 'score' => intval($score))]);
+			$query->update(['_id' => new MongoDB\BSON\ObjectId($id)], ['$set' => array('ac_name' => $ac_name, 'type' => $type, 'max_score' => intval($max_score))]);
 
 			$result = $this->conn->executeBulkWrite($this->database.'.'.$this->collection, $query);
 

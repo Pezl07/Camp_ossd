@@ -13,6 +13,8 @@ class Camp_controller extends CI_Controller{
 		$this->load->model('M_item');
 		$this->load->model('M_order_item');
 		$this->load->model('M_team');
+		$this->load->model('M_assess');
+		$this->load->model('M_activity');
 	}
 
     public function output($views = '', $data = []) {
