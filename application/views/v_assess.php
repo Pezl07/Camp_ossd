@@ -70,7 +70,7 @@ td.right {
             <?php foreach ($activity_types as $activity_type){ ?>
             <?php if($activity_type->type_name != 'Admin'){ ?>
             <option value="<?php echo $activity_type->_id ?>"
-                <?php if($type_id == $activity_type->_id) {echo "selected";}; ?>>
+                <?php if($type_id == $activity_type->type_name) {echo "selected";}; ?>>
                 <?php echo $activity_type->type_name ?>
             </option>
             <?php } ?>
@@ -88,13 +88,13 @@ td.right {
         <select class="ui dropdown day">
             <?php for($i = 7; $i <= 14; $i++){ ?>
             <?php if($i < 10){ ?>
-            <option value="2022-03-0<?php echo $i ?>"
-                <?php if(isset($day) && $day == "2022-03-0".$i) {echo "selected";}; ?>>
+            <option value="2022-04-0<?php echo $i ?>"
+                <?php if(isset($day) && $day == "2022-04-0".$i) {echo "selected";}; ?>>
                 วันที่ <?php echo $i ?> เมษายน 2565
             </option>
             <?php }else{ ?>
-            <option value="2022-03-<?php echo $i ?>"
-                <?php if(isset($day) && $day == "2022-03-".$i) {echo "selected";}; ?>>
+            <option value="2022-04-<?php echo $i ?>"
+                <?php if(isset($day) && $day == "2022-04-".$i) {echo "selected";}; ?>>
                 วันที่ <?php echo $i ?> เมษายน 2565
             </option>
             <?php } ?>
@@ -126,7 +126,7 @@ td.right {
                     <td class="right aligned">
                         <div class="input-ac">
                             <div class="ui transparent input">
-                                <input type="text" placeholder="/1000" value="<?php echo $activity->score ?>"
+                                <input type="text" placeholder="/1000" value="<?php if(isset($activity->score)) echo $activity->score ?>"
                                     max="<?php echo $activity->max_score ?>" min="0">
                             </div>
                         </div>

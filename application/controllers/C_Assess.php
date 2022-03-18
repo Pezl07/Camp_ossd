@@ -11,12 +11,13 @@ class C_Assess extends Camp_controller {
 			
 			if($_SESSION['user']->role == 'admin'){
 
-				$data['type_id'] = '62342aa328e2c98b0115edd0';
+				$data['type_id'] = 'Admin';
 
 			}else{
 
-				if(isset($type_id)){
-					$data['type_id'] = $type_id;
+				if(isset($type_id) && $type_id != 'ALL'){
+					$type = $this->M_activity_type->get_activity_type($type_id);
+					$data['type_id'] = $type->type_name;
 				}else{
 					$data['type_id'] = "ALL";
 				}
@@ -26,7 +27,8 @@ class C_Assess extends Camp_controller {
 			if(isset($day)){
 				$data['day'] = $day;
 			}else{
-				$data['day'] = date("Y-m-d");
+				$data['day'] = '2022-04-07';
+				// $data['day'] = date("Y-m-d");
 			}
 
 			$data['activities'] = $this->M_assess->get_assess_list($_SESSION['user']->_id, $data['day'], $data['type_id']);
