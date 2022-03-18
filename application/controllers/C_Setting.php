@@ -8,8 +8,9 @@ class C_Setting extends Camp_controller {
     function show_setting($page = 1, $type_id = NULL, $day = NULL) {
 		if($_SESSION['user']->role == 'admin'){
 
-			if(isset($type_id)){
-				$data['type_id'] = $type_id;
+			if(isset($type_id) && $type_id != 'ALL'){
+				$type = $this->M_activity_type->get_activity_type($type_id);
+				$data['type_id'] = $type->type_name;
 			}else{
 				$data['type_id'] = "ALL";
 			}
@@ -17,7 +18,8 @@ class C_Setting extends Camp_controller {
 			if(isset($day)){
 				$data['day'] = $day;
 			}else{
-				$data['day'] = date("Y-m-d");
+				$data['day'] = '2022-04-07';
+				// $data['day'] = date("Y-m-d");
 			}
 
 			$data['page'] = $page;
@@ -43,6 +45,20 @@ class C_Setting extends Camp_controller {
 			array_push($json_activity_types, $activity);
 		}
 		echo json_encode($json_activity_types);
+	}
+
+	function insert_activity(){
+		$obj_ac = $this->input->post();
+		print_r($obj_ac);
+		// $this->M_activity->insert($obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['date'], $obj_ac['max_score']);
+		// redirect('/C_Setting/show_setting/2');
+	}
+
+	function edit_activity(){
+		$obj_ac = $this->input->post();
+		print_r($obj_ac);
+		// $this->M_activity->update($obj_ac['id'], $obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['max_score']);
+		// redirect('/C_Setting/show_setting/2');
 	}
 	
 }

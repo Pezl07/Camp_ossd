@@ -8,7 +8,7 @@ class M_activity extends Da_activity {
 	function get_activity_list($date = NULL, $type = NULL) {
 		try {
 
-			if($type == 'ALL')
+			if($type != 'ALL')
 				$filter = ['date' => $date, 'type' => $type];
 			else
 				$filter = ['date' => $date];

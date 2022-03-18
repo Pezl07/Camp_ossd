@@ -14,7 +14,7 @@ class M_activity_type extends Da_activity_type {
 
 			return $result;
 		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
-			show_error('Error while fetching users: ' . $ex->getMessage(), 500);
+			show_error('Error while fetching activity_types: ' . $ex->getMessage(), 500);
 		}
 	}
 
@@ -25,13 +25,13 @@ class M_activity_type extends Da_activity_type {
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
 
-			foreach($result as $user) {
-				return $user;
+			foreach($result as $activity_type) {
+				return $activity_type;
 			}
 
 			return NULL;
 		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
-			show_error('Error while fetching user: ' . $ex->getMessage(), 500);
+			show_error('Error while fetching activity_type: ' . $ex->getMessage(), 500);
 		}
 	}
 

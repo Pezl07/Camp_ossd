@@ -19,6 +19,7 @@
         <?php if(isset($activity_types)){ ?>
             <tbody>
             <?php foreach($activity_types as $activity_type){ ?>
+                <?php if($activity_type->type_name != 'Admin') { ?>
                     <tr id="ac_<?php echo $activity_type->_id ?>">
                         <td class="center aligned">
                             <div class="name-ac">
@@ -30,6 +31,7 @@
                             <button class="btn btn-danger"><i class="trash alternate outline icon"></i></button>
                         </td>
                     </tr>
+                <?php } ?>
             <?php } ?>
             </tbody>
         <?php } ?>
