@@ -49,16 +49,16 @@ class C_Setting extends Camp_controller {
 
 	function insert_activity(){
 		$obj_ac = $this->input->post();
-		print_r($obj_ac);
-		// $this->M_activity->insert($obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['date'], $obj_ac['max_score']);
-		// redirect('/C_Setting/show_setting/2');
+		// print_r($obj_ac);
+		$this->M_activity->insert($obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['date'], $obj_ac['max_score']);
+		redirect('/C_Setting/show_setting/2');
 	}
 
 	function edit_activity(){
 		$obj_ac = $this->input->post();
-		print_r($obj_ac);
-		// $this->M_activity->update($obj_ac['id'], $obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['max_score']);
-		// redirect('/C_Setting/show_setting/2');
+		// print_r($obj_ac);
+		$this->M_activity->update($obj_ac['id'], $obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['max_score']);
+		redirect('/C_Setting/show_setting/2');
 	}
 	
 }

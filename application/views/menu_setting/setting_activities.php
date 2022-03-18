@@ -238,7 +238,7 @@ function edit_row(ac_id) {
                     </td> `;
     <?php }else{ ?> 
         
-        input += `<input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}">`
+        input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`;
         
     <?php } ?>
 
@@ -251,6 +251,7 @@ function edit_row(ac_id) {
                         </div>
                     </td>
                     <td class="right aligned action-ac">
+                        <input id="id" name="id" value="${ac_id}" hidden="true">
                         <button type="submit" class="btn btn-success" type="submit" style="height: 90px; width: 45%"> บันทึก </button>
                         <button type="button" class="btn btn-danger" style="height: 90px; width: 45%" onclick="cancel_edit_row('${ac_id}')"> ยกเลิก </button>
                     </td>
