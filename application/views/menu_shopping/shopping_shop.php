@@ -6,6 +6,7 @@
     </div>
 </div>
 
+<?php $count = 0 ?>
 
 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
     <?php foreach ($items as $item){ ?>
@@ -44,8 +45,23 @@
             <?php } ?>
         </div>
     </div>
-    <?php } ?>
+    <?php $count++; } ?>
+
 </div>
+
+<?php if($count == 0){ ?>
+    <div class="ui message text-center">
+        <div class="header">
+            ไม่มีสินค้าในระบบ
+        </div>
+        <p></p>
+    </div>
+    <style>
+        table {
+            display: none;
+        }
+    </style>
+<?php } ?>
 
 <script>
     function insert(id){

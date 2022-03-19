@@ -19,7 +19,6 @@
                 </tr>
             </thead>
 
-            <?php if(isset($activity_types)){ ?>
             <tbody>
                 <?php foreach($activity_types as $activity_type){ ?>
                 <?php if($activity_type->type_name != 'Admin') { ?>
@@ -39,11 +38,24 @@
                     </td>
                 </tr>
                 <?php } ?>
-                <?php } ?>
+                <?php $count++; } ?>
             </tbody>
-            <?php $count++; } ?>
-
         </table>
+
+        <?php if($count <= 1){ ?>
+        <div class="ui message text-center">
+            <div class="header">
+                ไม่มีประเภทกิจกรรมในระบบ
+            </div>
+            <p></p>
+        </div>
+        <style>
+            table {
+                display: none;
+            }
+        </style>
+        <?php } ?>
+
     </form>
 </div>
 

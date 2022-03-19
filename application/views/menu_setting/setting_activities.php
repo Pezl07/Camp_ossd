@@ -93,6 +93,21 @@
                 <?php $count++; } ?>
             </tbody>
         </table>
+
+        <?php if($count == 0){ ?>
+        <div class="ui message text-center">
+            <div class="header">
+                ไม่มีกิจกรรมในระบบ
+            </div>
+            <p></p>
+        </div>
+        <style>
+            table {
+                display: none;
+            }
+        </style>
+        <?php } ?>
+
     </form>
 </div>
 

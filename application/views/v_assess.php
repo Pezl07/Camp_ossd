@@ -138,7 +138,7 @@ td.right {
         <?php if($count == 0){ ?>
         <div class="ui message text-center">
             <div class="header">
-                ไม่มีการกิจกรรมในระบบ
+                ไม่มีกิจกรรมในระบบ
             </div>
             <p></p>
         </div>
