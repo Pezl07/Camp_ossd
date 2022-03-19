@@ -65,9 +65,23 @@
 <script>
 
 $(document).ready(function() {
+    $("form").validate({
+        errorClass: "error fail-alert",
+        validClass: "valid success-alert",
+        rules: {
+            type_name: {
+                required: true,
+            }
+        },
+        messages: {
+            type_name: {
+                required: '',
+            }
+        }
+    });
+
     <?php if($count <= 1){ ?>
         $('.ui.blue.button').click();
-        console.log('eiei');
     <?php } ?>
 });
 
@@ -82,7 +96,7 @@ function add_row() {
                         <td class="center aligned add">
                             <div class="name-ac">
                                 <div class="ui input" style="width: 100%">
-                                    <input type="text" placeholder="ชื่อประเภท Activity" id="type_name" name="type_name">
+                                    <input type="text" placeholder="ชื่อประเภท Activity" id="type_name" name="type_name" required>
                                 </div>
                             </div>
                         </td>
@@ -95,9 +109,12 @@ function add_row() {
 }
 
 function cancel_add_row() {
-    if ($('td').length == 0 || $('td:eq(0)').hasClass('add')) {
+    if ($('td:eq(0)').hasClass('add')) {
         $('#add').remove();
         $('form#input').attr('action', '');
+
+        if ($('td').length == 0)
+            add_row();
     }
 }
 
@@ -116,7 +133,7 @@ function edit_row(ac_id) {
                             <input type="text" value="${ac_id}" id="id" name="id" hidden="true">
                             <div class="name-ac">
                                 <div class="ui input" style="width: 100%">
-                                    <input type="text" placeholder="ชื่อประเภท Activity" value="${name_type_ac}" id="type_name" name="type_name">
+                                    <input type="text" placeholder="ชื่อประเภท Activity" value="${name_type_ac}" id="type_name" name="type_name" required>
                                 </div>
                             </div>
                         </td>

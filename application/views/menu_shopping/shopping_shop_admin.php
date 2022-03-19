@@ -93,11 +93,11 @@
                     <div class="two fields">
                         <div class="field">
                             <label>ชื่อ Item</label>
-                            <input type="text" name="item" id="item" placeholder="ชื่อ Item">
+                            <input type="text" name="item" id="item" placeholder="ชื่อ Item" required>
                         </div>
                         <div class="field">
                             <label>ประเภท Item</label>
-                            <select class="ui dropdown" style="height: 60% !important" id="type" name="type">
+                            <select class="ui dropdown" style="height: 60% !important" id="type" name="type" required>
                                 <option value="" disabled selected>ประเภท</option>
                                 <option value="ขอความช่วยเหลือ">ขอความช่วยเหลือ</option>
                                 <option value="โจมตี">โจมตี</option>
@@ -108,11 +108,11 @@
                     <div class="two fields">
                         <div class="field">
                             <label>ราคา ($SE)</label>
-                            <input type="number" placeholder="ราคา" min="1" id="price" name="price">
+                            <input type="number" placeholder="ราคา" min="1" id="price" name="price" required>
                         </div>
                         <div class="field">
                             <label>จำนวนครั้ง/วัน</label>
-                            <input type="number" placeholder="จำนวนครั้ง/วัน" min="1" id="quota" name="quota">
+                            <input type="number" placeholder="จำนวนครั้ง/วัน" min="1" id="quota" name="quota" required>
                         </div>
                     </div>
             </div>
@@ -146,8 +146,44 @@
 <script>
 $('.selection.dropdown').dropdown();
 
+$(document).ready(function() {
+    $("form#input").validate({
+        errorClass: "error fail-alert",
+        validClass: "valid success-alert",
+        rules: {
+            item: {
+                required: true,
+            },
+            type: {
+                required: true,
+            },
+            price: {
+                required: true,
+            },
+            quota: {
+                required: true
+            }
+        },
+        messages: {
+            item: {
+                required: '',
+            },
+            type: {
+                required: '',
+            },
+            price: {
+                required: '',
+            },
+            quota: {
+                required: ''
+            }
+        }
+    });
+});
+
 function add_item(){
     $('form#input').attr('action', '<?php echo base_url();?>index.php/C_Shopping/insert_item');
+    $('erre')
     console.log('insert');
 }
 

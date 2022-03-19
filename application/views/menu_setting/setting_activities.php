@@ -86,7 +86,8 @@
                         <button type="button" class="btn btn-warning"
                             onclick="edit_row('<?php echo $activity->_id ?>')">
                             <i class="edit outline icon"></i></button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity->_id ?>')">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity->_id ?>')">
                             <i class="trash alternate outline icon"></i></button>
                     </td>
                 </tr>
@@ -97,7 +98,8 @@
     </form>
 </div>
 
-<form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity" enctype="multipart/form-data" method="POST" id="delete">
+<form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity" enctype="multipart/form-data" method="POST"
+    id="delete">
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -107,7 +109,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, i don't</button>
-                    <button type="submit" class="btn btn-danger" >Yes, i do</button>
+                    <button type="submit" class="btn btn-danger">Yes, i do</button>
                 </div>
             </div>
         </div>
@@ -118,6 +120,32 @@
 var ac_type;
 
 $(document).ready(function() {
+    $("form").validate({
+        errorClass: "error fail-alert",
+        validClass: "valid success-alert",
+        rules: {
+            ac_name: {
+                required: true,
+            },
+            ac_type: {
+                required: true,
+            },
+            max_score: {
+                required: true,
+            },
+        },
+        messages: {
+            ac_name: {
+                required: '',
+            },
+            ac_type: {
+                required: '',
+            },
+            max_score: {
+                required: '',
+            },
+        }
+    });
     get_types();
     <?php if($count == 0){ ?>
     $('.ui.blue.button').click();
@@ -156,7 +184,7 @@ function add_row() {
                             <input type="text" hidden="true" value="${'<?php echo $day ?>'}" id="date" name="date">
                             <div class="name-ac">
                                 <div class="ui input" style="width: 100%">
-                                    <input type="text" placeholder="ชื่อ Activity" id="ac_name" name="ac_name">
+                                    <input type="text" placeholder="ชื่อ Activity" id="ac_name" name="ac_name" required>
                                 </div>
                             </div>
                         </td> 
@@ -166,7 +194,8 @@ function add_row() {
 
     input += `<td class="center aligned type" >
                     <div class="type-ac">
-                        <select class="ui dropdown type_id" style="width: 100%; height: 100%" id="ac_type" name="ac_type">
+                        <select class="ui dropdown type_id" style="width: 100%; height: 100%" id="ac_type" name="ac_type" required>
+                        <option value="" disabled selected> เลือกประเภท </option>
             `;
 
     for (var i = 0; i < ac_type.length; i++) {
@@ -189,7 +218,7 @@ function add_row() {
                     <td class="center aligned score">
                         <div class="max-score-ac">
                             <div class="ui input">
-                                <input type="text" placeholder="คะแนนเต็ม" id="max_score" name="max_score">
+                                <input type="text" placeholder="คะแนนเต็ม" id="max_score" name="max_score" required>
                             </div>
                         </div>
                     </td>
@@ -204,9 +233,12 @@ function add_row() {
 }
 
 function cancel_add_row() {
-    if ($('td').length == 0 || $('td:eq(0)').hasClass('add')) {
+    if ($('td:eq(0)').hasClass('add')) {
         $('#add').remove();
         $('form#input').attr('action', '');
+
+        if ($('td').length == 0)
+            add_row();
     }
 }
 
@@ -232,7 +264,7 @@ function edit_row(ac_id) {
                         <input type="text" hidden="true" value="${'<?php echo $day ?>'}" id="date" name="date">
                         <div class="name-ac">
                             <div class="ui input" style="width: 100%">
-                                <input type="text" placeholder="ชื่อ Activity" value="${name_ac}" id="ac_name" name="ac_name">
+                                <input type="text" placeholder="ชื่อ Activity" value="${name_ac}" id="ac_name" name="ac_name" required>
                             </div>
                         </div>
                     </td>`;
@@ -240,7 +272,8 @@ function edit_row(ac_id) {
     <?php if($type_id == 'ALL'){ ?>
     input += `<td class="center aligned type" >
                     <div class="type-ac">
-                        <select class="ui dropdown type_id" style="width: 100%; height: 100%" id="ac_type" name="ac_type">
+                        <select class="ui dropdown type_id" style="width: 100%; height: 100%" id="ac_type" name="ac_type" required>
+                        <option value="" disabled> เลือกประเภท </option>
             `;
 
     for (var i = 0; i < ac_type.length; i++) {
@@ -268,7 +301,7 @@ function edit_row(ac_id) {
                     <td class="center aligned score">
                         <div class="max-score-ac">
                             <div class="ui input">
-                                <input type="text" placeholder="คะแนนเต็ม" value="${max_score}" id="max_score" name="max_score">
+                                <input type="text" placeholder="คะแนนเต็ม" value="${max_score}" id="max_score" name="max_score" required>
                             </div>
                         </div>
                     </td>
