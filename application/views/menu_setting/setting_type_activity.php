@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<?php $count = 0 ?>
+<?php $count = 0; ?>
 
 <div class="rate-form">
     <form action="" enctype="multipart/form-data" method="POST" id="input">
@@ -42,20 +42,6 @@
             </tbody>
         </table>
 
-        <?php if($count <= 1){ ?>
-        <div class="ui message text-center">
-            <div class="header">
-                ไม่มีประเภทกิจกรรมในระบบ
-            </div>
-            <p></p>
-        </div>
-        <style>
-            table {
-                display: none;
-            }
-        </style>
-        <?php } ?>
-
     </form>
 </div>
 
@@ -77,11 +63,11 @@
 </form>
 
 <script>
-var undo_edit;
 
 $(document).ready(function() {
-    <?php if($count == 0){ ?>
-    $('.ui.blue.button').click();
+    <?php if($count <= 1){ ?>
+        $('.ui.blue.button').click();
+        console.log('eiei');
     <?php } ?>
 });
 

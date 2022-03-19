@@ -41,7 +41,7 @@
 
 </div>
 
-<?php $count = 0 ?>
+<?php $count = 0; ?>
 
 <div class="rate-form mt-4">
     <form action="" enctype="multipart/form-data" method="POST" id="input">
@@ -93,20 +93,6 @@
                 <?php $count++; } ?>
             </tbody>
         </table>
-
-        <?php if($count == 0){ ?>
-        <div class="ui message text-center">
-            <div class="header">
-                ไม่มีกิจกรรมในระบบ
-            </div>
-            <p></p>
-        </div>
-        <style>
-            table {
-                display: none;
-            }
-        </style>
-        <?php } ?>
 
     </form>
 </div>
