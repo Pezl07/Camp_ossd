@@ -7,7 +7,12 @@ class M_assess extends Da_assess {
 	
 	function get_assess_list($user_id = NULL, $date = NULL, $type = NULL) {
 		try {
-			$filter = ['user_id' => new MongoDB\BSON\ObjectId($user_id), 'date' => $date, 'type' => $type];
+
+			if($type != 'ALL')
+				$filter = ['user_id' => $user_id, 'date' => $date, 'type' => $type];
+			else
+				$filter = ['user_id' => $user_id, 'date' => $date];
+
 			$options = ['sort'=>array('_id'=>-1)];
 
 			$query = new MongoDB\Driver\Query($filter, $options);

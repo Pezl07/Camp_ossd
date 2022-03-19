@@ -121,13 +121,15 @@ td.right {
                     <td class="center aligned">
                         <div class="name-ac">
                             <?php echo $activity->ac_name ?>
+                            <input type="text" hidden="true" name="ac_name" id="ac_name" value="<?php echo $activity->ac_name ?>">
+                            <input type="text" hidden="true" name="type" id="type" value="<?php echo $activity->type ?>">
                         </div>
                     </td>
                     <td class="right aligned">
                         <div class="input-ac">
                             <div class="ui transparent input">
-                                <input type="text" placeholder="/1000" value="<?php if(isset($activity->score)) echo $activity->score ?>"
-                                    max="<?php echo $activity->max_score ?>" min="0">
+                                <input type="number" placeholder="/<?php echo $activity->max_score ?>" value="<?php if(isset($activity->score)) echo $activity->score ?>" 
+                                class="score_<?php echo $count ?>" id="score" name="score" min="0" max="<?php echo $activity->max_score ?>" onkeyup="check_number(<?php echo $count ?>,<?php echo $activity->max_score ?>)">
                             </div>
                         </div>
                     </td>
@@ -159,4 +161,11 @@ $('.type_id, .day').on('change', function() {
     window.location.href = '<?php echo base_url(); ?>' + 'index.php/C_Assess/show_assess/' + type_id + '/' +
         day;
 });
+
+function check_number(index,max_score) {
+    if($('.score_'+index).val() < 0)
+        $('.score_'+index).val(0);
+    else if($('.score_'+index).val() > max_score)
+        $('.score_'+index).val(max_score);
+}
 </script>
