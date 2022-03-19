@@ -13,7 +13,9 @@ class M_activity extends Da_activity {
 			else
 				$filter = ['date' => $date];
 
-			$query = new MongoDB\Driver\Query($filter);
+			$options = ['sort'=>array('_id'=>-1)];
+
+			$query = new MongoDB\Driver\Query($filter, $options);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
 			

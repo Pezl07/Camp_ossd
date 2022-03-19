@@ -8,7 +8,9 @@ class M_item extends Da_item {
 	function get_item_list() {
 		try {
 			$filter = [];
-			$query = new MongoDB\Driver\Query($filter);
+			$options = ['sort'=>array('_id'=>-1)];
+
+			$query = new MongoDB\Driver\Query($filter, $options);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
 

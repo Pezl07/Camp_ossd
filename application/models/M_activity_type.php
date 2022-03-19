@@ -8,7 +8,9 @@ class M_activity_type extends Da_activity_type {
 	function get_activity_type_list() {
 		try {
 			$filter = [];
-			$query = new MongoDB\Driver\Query($filter);
+			$options = ['sort'=>array('_id'=>-1)];
+
+			$query = new MongoDB\Driver\Query($filter, $options);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
 

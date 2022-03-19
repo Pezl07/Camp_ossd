@@ -12,7 +12,9 @@ class M_order_item extends Da_order_item {
 			}else{
 				$filter = ['date' => $date];
 			}
-			$query = new MongoDB\Driver\Query($filter);
+			$options = ['sort'=>array('_id'=>-1)];
+			
+			$query = new MongoDB\Driver\Query($filter, $options);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
 
@@ -42,7 +44,9 @@ class M_order_item extends Da_order_item {
 	function get_check_order($item, $date) {
 		try {
 			$filter = ['item' => $item, 'date' => $date];
-			$query = new MongoDB\Driver\Query($filter);
+			$options = ['sort'=>array('_id'=>-1)];
+
+			$query = new MongoDB\Driver\Query($filter, $options);
 
 			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
 

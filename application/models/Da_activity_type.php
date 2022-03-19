@@ -55,4 +55,21 @@ class Da_activity_type extends CI_Model {
 		
 	}
 
+	function delete($_id) {
+		try {
+			$query = new MongoDB\Driver\BulkWrite();
+			$query->delete(['_id' => new MongoDB\BSON\ObjectId($_id)]);
+
+			$result = $this->conn->executeBulkWrite($this->database.'.'.$this->collection, $query);
+
+			if($result == 1) {
+				return TRUE;
+			}
+
+			return FALSE;
+		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
+			show_error('Error while deleting users: ' . $ex->getMessage(), 500);
+		}
+	}
+
 }

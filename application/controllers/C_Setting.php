@@ -61,18 +61,32 @@ class C_Setting extends Camp_controller {
 		redirect('/C_Setting/show_setting/2');
 	}
 
+	function delete_activity(){
+		$obj_ac = $this->input->post();
+		// print_r($obj_ac);
+		$this->M_activity->delete($obj_ac['delete_id']);
+		redirect('/C_Setting/show_setting/2');
+	}
+
 	function insert_activity_type(){
 		$obj_ac = $this->input->post();
-		print_r($obj_ac);
-		// $this->M_activity->insert($obj_ac['type_name']);
-		// redirect('/C_Setting/show_setting/2');
+		// print_r($obj_ac);
+		$this->M_activity_type->insert($obj_ac['type_name']);
+		redirect('/C_Setting/show_setting/');
 	}
 
 	function edit_activity_type(){
 		$obj_ac = $this->input->post();
-		print_r($obj_ac);
-		// $this->M_activity->update($obj_ac['id'], $obj_ac['type_name']);
-		// redirect('/C_Setting/show_setting/');
+		// print_r($obj_ac);
+		$this->M_activity_type->update($obj_ac['id'], $obj_ac['type_name']);
+		redirect('/C_Setting/show_setting/');
+	}
+
+	function delete_activity_type(){
+		$obj_ac = $this->input->post();
+		// print_r($obj_ac);
+		$this->M_activity_type->delete($obj_ac['delete_id']);
+		redirect('/C_Setting/show_setting/');
 	}
 	
 }

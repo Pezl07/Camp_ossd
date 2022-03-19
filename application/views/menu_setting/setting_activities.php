@@ -44,23 +44,23 @@
 <?php $count = 0 ?>
 
 <div class="rate-form mt-4">
-<form action="" enctype="multipart/form-data" method="POST">
-    <table class="ui celled table">
-        <thead>
-            <tr>
-                <th class="center aligned">ชื่อ Activities</th>
+    <form action="" enctype="multipart/form-data" method="POST" id="input">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th class="center aligned">ชื่อ Activities</th>
 
-                <?php if($type_id == 'ALL'){ ?>
-                <th class="center aligned" style="width: 30%">ประเภท</th>
-                <?php } ?>
+                    <?php if($type_id == 'ALL'){ ?>
+                    <th class="center aligned" style="width: 30%">ประเภท</th>
+                    <?php } ?>
 
-                <th class="center aligned">คะแนนเต็ม</th>
-                <th class="center aligned"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($activities as $activity) {?>
-            <tr id="ac_<?php echo $activity->_id ?>">
+                    <th class="center aligned">คะแนนเต็ม</th>
+                    <th class="center aligned"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($activities as $activity) {?>
+                <tr id="ac_<?php echo $activity->_id ?>">
                     <td class="center aligned">
                         <div class="name-ac">
                             <?php echo $activity->ac_name ?>
@@ -83,16 +83,35 @@
                         </div>
                     </td>
                     <td class="right aligned action-ac">
-                        <button type="button" class="btn btn-warning" onclick="edit_row('<?php echo $activity->_id ?>')"><i class="edit outline icon"></i></button>
-                        <button type="button" class="btn btn-danger"><i class="trash alternate outline icon"></i></button>
+                        <button type="button" class="btn btn-warning"
+                            onclick="edit_row('<?php echo $activity->_id ?>')">
+                            <i class="edit outline icon"></i></button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="get_id_delete('<?php echo $activity->_id ?>')">
+                            <i class="trash alternate outline icon"></i></button>
                     </td>
-            </tr>
-            <?php $count++; } ?>
-        </tbody>
-    </table>
+                </tr>
+                <?php $count++; } ?>
+            </tbody>
+        </table>
     </form>
 </div>
 
+<form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity" enctype="multipart/form-data" method="POST" id="delete">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <h1> Delete ? </h1>
+                    <input type="hidden" name="delete_id" id="delete_id" hidden="true">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, i don't</button>
+                    <button type="submit" class="btn btn-danger" >Yes, i do</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <script>
 var ac_type;
@@ -100,7 +119,7 @@ var ac_type;
 $(document).ready(function() {
     get_types();
     <?php if($count == 0){ ?>
-        $('.ui.blue.button').click();
+    $('.ui.blue.button').click();
     <?php } ?>
 });
 
@@ -124,12 +143,12 @@ function get_types() {
 }
 
 function add_row() {
-    if ($('td:eq(0)').hasClass('add') || $('form').attr('action') != '') {
+    if ($('td:eq(0)').hasClass('add') || $('form#input').attr('action') != '') {
         return;
     }
 
-    $('form').attr('action', '<?php echo base_url(); ?>index.php/C_Setting/insert_activity');
-        
+    $('form#input').attr('action', '<?php echo base_url(); ?>index.php/C_Setting/insert_activity');
+
     var input = `
                     <tr id="add">
                         <td class="center aligned add">
@@ -159,10 +178,10 @@ function add_row() {
     input += `</select>
                     </div>
                 </td> `;
-    <?php }else{ ?> 
-        
-        input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`
-        
+    <?php }else{ ?>
+
+    input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`
+
     <?php } ?>
 
     input += `
@@ -183,16 +202,16 @@ function add_row() {
     $('tbody').prepend(input);
 }
 
-function cancel_add_row(){
-    if($('td').length == 0 || $('td:eq(0)').hasClass('add')){
+function cancel_add_row() {
+    if ($('td').length == 0 || $('td:eq(0)').hasClass('add')) {
         $('#add').remove();
-        $('form').attr('action', '');
+        $('form#input').attr('action', '');
     }
 }
 
 function edit_row(ac_id) {
 
-    if ($('td:eq(0)').hasClass('add') || $('form').attr('action') != '') {
+    if ($('td:eq(0)').hasClass('add') || $('form#input').attr('action') != '') {
         return;
     }
 
@@ -200,12 +219,12 @@ function edit_row(ac_id) {
     var max_score = $('#ac_' + ac_id + ' td .max-score-ac')[0].innerText;
 
     <?php if($type_id == 'ALL'){ ?>
-        var type_ac = $('#ac_' + ac_id + ' td .type-ac')[0].innerText;
-        console.log(max_score);
+    var type_ac = $('#ac_' + ac_id + ' td .type-ac')[0].innerText;
+    console.log(max_score);
     <?php } ?>
 
 
-    $('form').attr('action', '<?php echo base_url(); ?>index.php/C_Setting/edit_activity');
+    $('form#input').attr('action', '<?php echo base_url(); ?>index.php/C_Setting/edit_activity');
 
     var input = ` <tr id="ac_${ac_id}" class="edit">
                     <td class="center aligned add">
@@ -238,10 +257,10 @@ function edit_row(ac_id) {
     input += `</select>
                         </div>
                     </td> `;
-    <?php }else{ ?> 
-        
-        input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`;
-        
+    <?php }else{ ?>
+
+    input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`;
+
     <?php } ?>
 
     input += `                
@@ -266,6 +285,10 @@ function edit_row(ac_id) {
 function cancel_edit_row(ac_id) {
     $('#ac_' + ac_id).attr('hidden', false);
     $('#ac_' + ac_id + '.edit').remove();
-    $('form').attr('action', '');
+    $('form#input').attr('action', '');
+}
+
+function get_id_delete(ac_id) {
+    $('#delete_id').val(ac_id);
 }
 </script>
