@@ -86,7 +86,7 @@
                         <button type="button" class="btn btn-warning"
                             onclick="edit_row('<?php echo $activity->_id ?>')">
                             <i class="edit outline icon"></i></button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="get_id_delete('<?php echo $activity->_id ?>')">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity->_id ?>')">
                             <i class="trash alternate outline icon"></i></button>
                     </td>
                 </tr>
@@ -97,11 +97,11 @@
 </div>
 
 <form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity" enctype="multipart/form-data" method="POST" id="delete">
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center py-5">
-                    <h1> Delete ? </h1>
+                    <h1 style="font-weight: bold; font-size: 50px !important"> Delete ? </h1>
                     <input type="hidden" name="delete_id" id="delete_id" hidden="true">
                 </div>
                 <div class="modal-footer">

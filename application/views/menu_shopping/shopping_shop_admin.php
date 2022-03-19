@@ -51,7 +51,10 @@
                 <div class="text-center">
                     <button class="btn btn-outline-dark btn-warning text-white mt-auto" data-bs-toggle="modal" data-bs-target="#modal-item" 
                     onclick="edit_item('<?php echo $item->_id ?>')">Edit</button>
-                    <a class="btn btn-outline-dark btn-danger text-white mt-auto" href="#">Delet</a>
+                    <button type="button" class="btn btn-outline-dark btn-danger text-white mt-auto" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        onclick="get_id_delete('<?php echo $item->_id ?>')">
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -67,7 +70,7 @@
                 <h5 class="modal-title" id="modal-itemLabel">เพิ่ม Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" class="ui form" enctype="multipart/form-data" method="POST">
+            <form action="" class="ui form" enctype="multipart/form-data" method="POST" id="input">
             <input type="text" hidden id="item_id" value="" name="item_id">
             <div class="modal-body">
                     <div class="two fields">
@@ -105,16 +108,34 @@
     </div>
 </div>
 
+<form action="<?php echo base_url(); ?>index.php/C_Shopping/delete_item" enctype="multipart/form-data" method="POST" id="delete">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <h1 style="font-weight: bold; font-size: 50px !important"> Delete ? </h1>
+                    <input type="hidden" name="delete_id" id="delete_id" hidden="true">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, i don't</button>
+                    <button type="submit" class="btn btn-danger" >Yes, i do</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
 <script>
 $('.selection.dropdown').dropdown();
 
 function add_item(){
-    $('form').attr('action', '<?php echo base_url();?>index.php/C_Shopping/insert_item');
+    $('form#input').attr('action', '<?php echo base_url();?>index.php/C_Shopping/insert_item');
     console.log('insert');
 }
 
 function edit_item(id){
-    $('form').attr('action', '<?php echo base_url();?>index.php/C_Shopping/update_item');
+    $('form#input').attr('action', '<?php echo base_url();?>index.php/C_Shopping/update_item');
     $('#item_id').val(id);
     $('#item').val($('#item_'+id+' div div div .item-name').text());
     $('#quota').val($('#item_'+id+' div div div .item-quota').text());
@@ -123,4 +144,8 @@ function edit_item(id){
     console.log(type);
 }
 
+
+function get_id_delete(ac_id) {
+    $('#delete_id').val(ac_id);
+}
 </script>

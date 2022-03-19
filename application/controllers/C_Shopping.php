@@ -62,13 +62,10 @@ class C_Shopping extends Camp_controller {
         redirect('C_Shopping/show_shopping');
     }
 
-    function test(){
-        $items = $this->M_order_item->get_order_list(4, date("Y-m-d"));
-
-        echo "<pre>";
-        foreach($items as $item){
-            print_r($item);
-        }
-        echo "</pre>";
+    function delete_item(){
+        $obj_item = $this->input->post();
+        $this->M_item->delete($obj_item['delete_id']);
+        redirect('C_Shopping/show_shopping');
     }
+
 }
