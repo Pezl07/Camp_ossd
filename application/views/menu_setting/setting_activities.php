@@ -174,7 +174,7 @@ function add_row() {
                         </div>
                     </td>
                     <td class="right aligned action-ac">
-                        <button type="submit" class="btn btn-success" type="submit" style="height: 90px; width: 45%"> บันทึก </button>
+                        <button type="submit" class="btn btn-success" style="height: 90px; width: 45%"> บันทึก </button>
                         <button type="button" class="btn btn-danger" style="height: 90px; width: 45%" onclick="cancel_add_row()"> ยกเลิก </button>
                     </td>
                 </tr>
@@ -184,8 +184,10 @@ function add_row() {
 }
 
 function cancel_add_row(){
-    if($('td').length == 0)
+    if($('td').length == 0 || $('td:eq(0)').hasClass('add')){
         $('#add').remove();
+        $('form').attr('action', '');
+    }
 }
 
 function edit_row(ac_id) {
@@ -252,7 +254,7 @@ function edit_row(ac_id) {
                     </td>
                     <td class="right aligned action-ac">
                         <input id="id" name="id" value="${ac_id}" hidden="true">
-                        <button type="submit" class="btn btn-success" type="submit" style="height: 90px; width: 45%"> บันทึก </button>
+                        <button type="submit" class="btn btn-success" style="height: 90px; width: 45%"> บันทึก </button>
                         <button type="button" class="btn btn-danger" style="height: 90px; width: 45%" onclick="cancel_edit_row('${ac_id}')"> ยกเลิก </button>
                     </td>
                 </tr>`;
