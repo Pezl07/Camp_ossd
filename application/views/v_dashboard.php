@@ -27,7 +27,10 @@ tspan {
                 <?php echo $activity_type->type_name ?>
             </option>
             <?php } ?>
-
+            <option value="Shopping"
+                <?php if(isset($type_id) && $type_id == "Shopping") {echo "selected";}; ?>>
+                Shopping
+            </option>
         </select>
     </div>
     <div id="chart"></div>

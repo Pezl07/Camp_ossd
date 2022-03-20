@@ -37,4 +37,22 @@ class M_assess extends Da_assess {
 		}
 	}
 
+	function get_assess_by_team($team = NULL, $ac_id = NULL, $user_id = NULL, $date = NULL) {
+		try {
+
+			$filter = ['team' => intval($team), 'ac_id' => new MongoDB\BSON\ObjectId($ac_id), 'user_id' => new MongoDB\BSON\ObjectId($user_id), 'date' => $date];
+
+			$query = new MongoDB\Driver\Query($filter);
+
+			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
+
+			foreach($result as $assess) {
+				return $assess;
+			}
+
+			return NULL;
+		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
+			show_error('Error while fetching assess: ' . $ex->getMessage(), 500);
+		}
+	}
 }

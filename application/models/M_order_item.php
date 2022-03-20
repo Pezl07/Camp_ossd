@@ -56,4 +56,19 @@ class M_order_item extends Da_order_item {
 		}
 	}
 
+	function get_order_items() {
+		try {
+			$filter = [];
+			$options = [];
+
+			$query = new MongoDB\Driver\Query($filter, $options);
+
+			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
+
+			return $result;
+		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
+			show_error('Error while fetching users: ' . $ex->getMessage(), 500);
+		}
+	}
+
 }

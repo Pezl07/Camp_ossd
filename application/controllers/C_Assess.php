@@ -53,17 +53,27 @@ class C_Assess extends Camp_controller {
 	function insert_assess(){
 		$obj_assess = $this->input->post();
 
-		// echo json_encode($obj_assess);
+		$team = $this->M_team->get_score($obj_assess['team']);
 
 		if( count(iterator_to_array($this->M_assess->get_assess($obj_assess['ac_id'], $obj_assess['user_id'], $obj_assess['date']))) ){
+
+			$assess = $this->M_assess->get_assess_by_team($obj_assess['team'], $obj_assess['ac_id'], $obj_assess['user_id'], $obj_assess['date']);
+			$team->score -= $assess->score;
+			
 			$this->M_assess->update($obj_assess['team'], $obj_assess['user_id'], $obj_assess['score'], $obj_assess['ac_id'], $obj_assess['date']);
+
+			$team->score += intval($obj_assess['score']);
+
 			$data['message'] = 'update success';
 		}else{
 			$this->M_assess->insert($obj_assess['team'], $obj_assess['user_id'], $obj_assess['score'], $obj_assess['ac_id'], $obj_assess['date'], $obj_assess['type']);
+			$team->score += intval($obj_assess['score']);
 			$data['message'] = 'insert success';
 		}
+
+		$this->M_team->update($obj_assess['team'], $team->score);
 
 		echo json_encode($data);
 	}
 	
-}
+}	

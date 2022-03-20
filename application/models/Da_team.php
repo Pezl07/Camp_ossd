@@ -13,7 +13,7 @@ class Da_team extends CI_Model {
 		$this->conn = $this->mongodb->getConn();
 	}
 
-	function update_score($team, $score) {
+	function update($team, $score) {
 		try {
 			$query = new MongoDB\Driver\BulkWrite();
 			$query->update(['team' => intval($team)], ['$set' => array('score' => intval($score))]);

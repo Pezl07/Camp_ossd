@@ -40,8 +40,13 @@ class C_Shopping extends Camp_controller {
         }
 
         if($count < $item->quota){
+
             $this->M_order_item->insert(intval($obj_order['team']), $obj_order['item'], $obj_order['type'], intval($obj_order['price']), $obj_order['date']);
-            $this->M_team->update_score($obj_order['team'], $obj_order['score'] - $obj_order['price']);
+
+            $team = $this->M_team->get_score($obj_order['team']);
+            $team->score -= $obj_order['price'];
+
+            $this->M_team->update($obj_order['team'], $team->score);
             $message = 'สั่งซื้อสำเร็จ';
         }else{
             $message = 'เกินกำหนดการสั่งซื้อ';
