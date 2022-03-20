@@ -31,4 +31,8 @@ class Camp_controller extends CI_Controller{
 	public function page_error() {
 			$this->load->view('v_404page');
 	}
+
+	public function check($val){
+		echo "<pre>"; print_r($val); echo "</pre>";
+	}
 }

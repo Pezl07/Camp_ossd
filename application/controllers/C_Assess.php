@@ -31,8 +31,6 @@ class C_Assess extends Camp_controller {
 				// $data['day'] = date("Y-m-d");
 			}
 
-			// $data['assess'] = $this->M_assess->get_assess_list($_SESSION['user']->_id, $data['day'], $data['type_id']);
-
 			$data['activities'] = $this->M_activity->get_activity_list($data['day'], $data['type_id']);
 
 			$data['activity_types'] = $this->M_activity_type->get_activity_type_list();
@@ -41,6 +39,31 @@ class C_Assess extends Camp_controller {
 		}else{
 			redirect('/');
 		}
+	}
+
+	function get_score(){
+		$obj_assess = $this->input->post();
+		$assess = $this->M_assess->get_assess($obj_assess['ac_id'], $obj_assess['user_id'], $obj_assess['date']);
+
+		foreach($assess as $result){
+			echo json_encode($result);
+		}
+	}
+
+	function insert_assess(){
+		$obj_assess = $this->input->post();
+
+		// echo json_encode($obj_assess);
+
+		if( count(iterator_to_array($this->M_assess->get_assess($obj_assess['ac_id'], $obj_assess['user_id'], $obj_assess['date']))) ){
+			$this->M_assess->update($obj_assess['team'], $obj_assess['user_id'], $obj_assess['score'], $obj_assess['ac_id'], $obj_assess['date']);
+			$data['message'] = 'update success';
+		}else{
+			$this->M_assess->insert($obj_assess['team'], $obj_assess['user_id'], $obj_assess['score'], $obj_assess['ac_id'], $obj_assess['date'], $obj_assess['type']);
+			$data['message'] = 'insert success';
+		}
+
+		echo json_encode($data);
 	}
 	
 }

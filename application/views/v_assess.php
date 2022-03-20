@@ -102,7 +102,7 @@ td.right {
             <?php } ?>
         </select>
 
-        <button class="ui green button float-end"> บันทึก </button>
+        <button class="ui green button float-end" onclick="save_assess()"> บันทึก </button>
     </div>
 
     <?php $count = 0 ?>
@@ -121,15 +121,20 @@ td.right {
                     <td class="center aligned">
                         <div class="name-ac">
                             <?php echo $activity->ac_name ?>
-                            <input type="text" hidden="true" name="ac_name" id="ac_name" value="<?php echo $activity->ac_name ?>">
-                            <input type="text" hidden="true" name="type" id="type" value="<?php echo $activity->type ?>">
+                            <input type="text" hidden="true" name="ac_id" id="ac_id"
+                                value="<?php echo $activity->_id ?>">
+                            <input type="text" hidden="true" name="type" id="type"
+                                value="<?php echo $activity->type ?>">
                         </div>
                     </td>
                     <td class="right aligned">
                         <div class="input-ac">
-                            <div class="ui transparent input">
-                                <input type="number" placeholder="/<?php echo $activity->max_score ?>" value="<?php if(isset($activity->score)) echo $activity->score ?>" 
-                                class="score_<?php echo $count ?>" id="score" name="score" min="0" max="<?php echo $activity->max_score ?>" onkeyup="check_number(<?php echo $count ?>,<?php echo $activity->max_score ?>)">
+                            <div class="ui transparent input" style="width: 100%">
+                                <input type="number" placeholder="/<?php echo $activity->max_score ?>"
+                                    value="<?php if(isset($activity->score)) echo $activity->score ?>"
+                                    class="score_<?php echo $count ?>" id="score" name="score" min="0"
+                                    max="<?php echo $activity->max_score ?>"
+                                    onkeyup="check_number(<?php echo $count ?>,<?php echo $activity->max_score ?>)">
                             </div>
                         </div>
                     </td>
@@ -145,9 +150,9 @@ td.right {
             <p></p>
         </div>
         <style>
-            table {
-                display: none;
-            }
+        table {
+            display: none;
+        }
         </style>
         <?php } ?>
     </div>
@@ -155,6 +160,39 @@ td.right {
 </div>
 
 <script>
+$(document).ready(function() {
+    get_score();
+    console.log('eieiei');
+});
+
+function get_score() {
+    var user_id = '<?php echo $_SESSION['user']->_id; ?>';
+    var date = '<?php echo $day; ?>';
+
+    for (var i = 0; i < $('tbody tr').length; i++) {
+        var ac_id = $('input[name=ac_id]:eq(' + i + ')').val();
+
+        $.ajax({
+            url: '<?php echo base_url() . 'index.php/C_Assess/get_score' ?>',
+            method: 'POST',
+            dataType: 'JSON',
+            async: false,
+            data: {
+                user_id: user_id,
+                ac_id: ac_id,
+                date: date
+            },
+            success: function(data) {
+                var placeholder = $('input[name=score]:eq(' + i + ')').attr('placeholder');
+                if (data.score == 0)
+                    $('input[name=score]:eq(' + i + ')').attr('placeholder', '0' + placeholder);
+                else
+                    $('input[name=score]:eq(' + i + ')').attr('placeholder', data.score + placeholder);
+            }
+        });
+    }
+}
+
 $('.type_id, .day').on('change', function() {
     var type_id = $('.type_id').val();
     var day = $('.day').val();
@@ -162,10 +200,43 @@ $('.type_id, .day').on('change', function() {
         day;
 });
 
-function check_number(index,max_score) {
-    if($('.score_'+index).val() < 0)
-        $('.score_'+index).val(0);
-    else if($('.score_'+index).val() > max_score)
-        $('.score_'+index).val(max_score);
+function check_number(index, max_score) {
+    if ($('.score_' + index).val() < 0)
+        $('.score_' + index).val(0);
+    else if ($('.score_' + index).val() > max_score)
+        $('.score_' + index).val(max_score);
 }
+
+function save_assess() {
+
+    var team = <?php echo $_SESSION['user']->team; ?>;
+    var user_id = '<?php echo $_SESSION['user']->_id; ?>';
+    var date = '<?php echo $day; ?>';
+
+    for (var i = 0; i < $('tbody tr').length; i++) {
+        var ac_id = $('input[name=ac_id]:eq(' + i + ')').val();
+        var score = $('input[name=score]:eq(' + i + ')').val();
+        var type = $('input[name=type]:eq(' + i + ')').val();
+
+        $.ajax({
+            url: '<?php echo base_url() . 'index.php/C_Assess/insert_assess' ?>',
+            method: 'POST',
+            dataType: 'JSON',
+            async: false,
+            data: {
+                team: team,
+                date: date,
+                ac_id: ac_id,
+                user_id: user_id,
+                type: type,
+                score: score
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+
+}
+
 </script>

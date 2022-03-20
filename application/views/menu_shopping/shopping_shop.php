@@ -87,6 +87,5 @@
                 console.log(data);
             }
         });
-        location.reload();
     }
 </script>

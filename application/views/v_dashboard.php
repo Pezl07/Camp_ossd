@@ -95,31 +95,31 @@ var data_bar_chart = [{
     showInLegend: false,
     dataLabels: default_formatter,
     data: [{
-            y: <?php echo $team[0]->score ?>
+            y: <?php echo $team[0] ?>
         },
         {
-            y: <?php echo $team[1]->score ?>
+            y: <?php echo $team[1] ?>
         },
         {
-            y: <?php echo $team[2]->score ?>
+            y: <?php echo $team[2] ?>
         },
         {
-            y: <?php echo $team[3]->score ?>
+            y: <?php echo $team[3] ?>
         },
         {
-            y: <?php echo $team[4]->score ?>
+            y: <?php echo $team[4] ?>
         },
         {
-            y: <?php echo $team[5]->score ?>
+            y: <?php echo $team[5] ?>
         },
         {
-            y: <?php echo $team[6]->score ?>
+            y: <?php echo $team[6] ?>
         },
         {
-            y: <?php echo $team[7]->score ?>
+            y: <?php echo $team[7] ?>
         },
         {
-            y: <?php echo $team[8]->score ?>
+            y: <?php echo $team[8] ?>
         }
 
     ]

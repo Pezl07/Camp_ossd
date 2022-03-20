@@ -13,16 +13,15 @@ class Da_assess extends CI_Model {
 		$this->conn = $this->mongodb->getConn();
 	}
 
-	function insert($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $user_id = NULL, $max_score = NULL, $score = NULL) {
+	function insert($team = NULL, $user_id = NULL, $score = NULL, $ac_id = NULL, $date = NULL, $type = NULL) {
 
 		try {
 			$assess = array(
-				'team' => $team, 
-				'date' => $date, 
-				'ac_name' => $ac_name,
+				'team' => intval($team), 
+				'date' => $date,
+				'user_id' => new MongoDB\BSON\ObjectId($user_id),
+				'ac_id' => new MongoDB\BSON\ObjectId($ac_id),
 				'type' => $type,
-				'user_id' => $user_id,
-				'max_score' => intval($max_score),
 				'score' => intval($score)
 			);
 
@@ -42,11 +41,11 @@ class Da_assess extends CI_Model {
 		
 	}
 
-	function update($team = NULL, $date = NULL, $ac_name = NULL, $type = NULL, $user_id = NULL, $max_score = NULL, $score = NULL) {
+	function update($team = NULL, $user_id = NULL, $score = NULL, $ac_id = NULL, $date = NULL) {
 		try {
 			$query = new MongoDB\Driver\BulkWrite();
-			$query->update(['team' => $team, 'date' => $date, 'ac_name' => $ac_name, 'type' => $type, 'user_id' => new MongoDB\BSON\ObjectId($user_id)], 
-						['$set' => array('max_score' => intval($max_score), 'score' => intval($score))]);
+			$query->update(['team' => intval($team), 'user_id' => new MongoDB\BSON\ObjectId($user_id), 'ac_id' => new MongoDB\BSON\ObjectId($ac_id), 'date' => $date,], 
+						['$set' => array('score' => intval($score))]);
 
 			$result = $this->conn->executeBulkWrite($this->database.'.'.$this->collection, $query);
 
