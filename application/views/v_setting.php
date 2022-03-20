@@ -4,7 +4,7 @@
 }
 
 table {
-    background-color: rgba(0, 0, 0, 0.7) !important;
+    background-color: #810000 !important;
     border-radius: 15px !important;
     padding-bottom: 50px !important;
 }

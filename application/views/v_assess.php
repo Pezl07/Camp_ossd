@@ -4,7 +4,7 @@
 }
 
 table {
-    background-color: rgba(0, 0, 0, 0.7) !important;
+    background-color: #810000 !important;
     border-radius: 15px !important;
     padding-bottom: 50px !important;
 }
@@ -18,7 +18,7 @@ th {
 
 td {
     font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: #1B1717 !important;
 }
 
 th {
