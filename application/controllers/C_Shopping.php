@@ -47,9 +47,9 @@ class C_Shopping extends Camp_controller {
             $team->score -= $obj_order['price'];
 
             $this->M_team->update($obj_order['team'], $team->score);
-            $message = 'สั่งซื้อสำเร็จ';
+            $message = 'success';
         }else{
-            $message = 'เกินกำหนดการสั่งซื้อ';
+            $message = 'fail';
         }
 
         echo json_encode($message);

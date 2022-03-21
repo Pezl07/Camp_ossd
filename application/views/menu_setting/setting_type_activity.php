@@ -62,12 +62,12 @@ td {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center py-5">
-                    <h1 style="font-weight: bold; font-size: 50px !important"> Delete ? </h1>
+                    <h1 style="font-weight: bold; font-size: 50px !important"> ยืนยันการลบ </h1>
                     <input type="hidden" name="delete_id" id="delete_id" hidden="true">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, i don't</button>
-                    <button type="submit" class="btn btn-danger" >Yes, i do</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-danger" >ยืนยัน</button>
                 </div>
             </div>
         </div>

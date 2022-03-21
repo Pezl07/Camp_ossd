@@ -222,7 +222,7 @@ function save_assess() {
             url: '<?php echo base_url() . 'index.php/C_Assess/insert_assess' ?>',
             method: 'POST',
             dataType: 'JSON',
-            async: false,
+            async: true,
             data: {
                 team: team,
                 date: date,
@@ -237,6 +237,12 @@ function save_assess() {
         });
     }
 
-}
+    swal({
+        title: "บันทึกสำเร็จ",
+        text: "",
+        icon: "success",
+        button: "OK",
+    });
 
+}
 </script>
