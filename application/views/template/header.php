@@ -194,10 +194,7 @@
                     <img class="ui avatar image" src="https://cdn-icons.flaticon.com/png/512/3093/premium/3093000.png?token=exp=1647829854~hmac=5a2451aa5b3e50eb7632e4544234ebeb" style="background-color: white;">
                 <?php } else{ ?>
                     <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">
-
                 <?php } ?>
-
-                </img>
                 <div class="btn-logout text-center transition hidden">
                     <a class="ui red button m-0" href="<?= base_url(); ?>index.php/C_Login/logout"> LOGOUT </a>
                 </div>
