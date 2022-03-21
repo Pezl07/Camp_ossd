@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200&family=Sarabun:wght@100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/style.css" /> -->
 
     <style type="text/css">
     *:not(i) {
@@ -190,7 +190,13 @@
                         ตำแหน่ง : <?php echo $_SESSION['user']->role; if($_SESSION['user']->role != 'admin') echo ' มกุล '. $_SESSION['user']->team; ?>
                     </div>
                 </div>
-                <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">
+                <?php if($_SESSION['user']->role == 'admin'){ ?>
+                    <img class="ui avatar image" src="https://cdn-icons.flaticon.com/png/512/3093/premium/3093000.png?token=exp=1647829854~hmac=5a2451aa5b3e50eb7632e4544234ebeb" style="background-color: white;">
+                <?php } else{ ?>
+                    <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">
+
+                <?php } ?>
+
                 </img>
                 <div class="btn-logout text-center transition hidden">
                     <a class="ui red button m-0" href="<?= base_url(); ?>index.php/C_Login/logout"> LOGOUT </a>
