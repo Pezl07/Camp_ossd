@@ -20,6 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200&family=Sarabun:wght@100&display=swap"
         rel="stylesheet">
+        <link rel = "icon" href = "<?= base_url() ?>assets/img/Logo.png" type = "image/x-icon">
     <style type="text/css">
     *:not(i) {
         font-family: 'Mitr', sans-serif !important;

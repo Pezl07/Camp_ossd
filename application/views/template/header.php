@@ -19,6 +19,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200&family=Sarabun:wght@100&display=swap"
         rel="stylesheet">
+
+    <link rel = "icon" href = "<?= base_url() ?>assets/img/Logo.png" type = "image/x-icon">
     <!-- <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/style.css" /> -->
 
     <style type="text/css">
@@ -132,7 +134,8 @@
     <div class="ui sidebar inverted vertical menu">
         <div class="Logo-camp text-center mb-3" style="cursor: pointer"
             onclick="window.location.href = '<?= base_url(); ?>'">
-            <img src="https://se.buu.ac.th/gami_ossd/assets/dist/img/cluster/cluster4.png" style="width: 100px;">
+            <!-- <img src="https://se.buu.ac.th/gami_ossd/assets/dist/img/cluster/cluster4.png" style="width: 100px;"> -->
+            <img src="<?= base_url() ?>assets/img/Logo.png" style="width: 100px;">
             <h5>OSSD CAMP #10</h5>
         </div>
         <a class="item" href="<?= base_url(); ?> ">
