@@ -2,6 +2,16 @@
 .max-score-ac .input input {
     width: 200px;
 }
+table {
+    background-color: #810000 !important;
+    border-radius: 15px !important;
+    padding-bottom: 50px !important;
+}
+
+td {
+    font-size: 20px;
+    background-color: #1B1717 !important;
+}
 </style>
 
 <div class="menu-setting d-flex mb-5">

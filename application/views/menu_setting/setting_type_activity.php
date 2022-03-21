@@ -1,3 +1,15 @@
+<style>
+table {
+background-color: #810000 !important;
+border-radius: 15px !important;
+padding-bottom: 50px !important;
+}
+
+td {
+    font-size: 20px;
+    background-color: #1B1717 !important;
+}
+</style>
 <div class="menu-setting d-flex mb-5">
     <div class="type-activity text-center col-2 p-3 active">ประเภท Activity</div>
     <div class="activities text-center col-2 p-3 " onclick="change_menu(2)">Activities</div>
