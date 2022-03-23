@@ -130,12 +130,12 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center py-5">
-                    <h1 style="font-weight: bold; font-size: 50px !important"> Delete ? </h1>
+                    <h1 style="font-weight: bold; font-size: 50px !important"> ยืนยันการลบ </h1>
                     <input type="hidden" name="delete_id" id="delete_id" hidden="true">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, i don't</button>
-                    <button type="submit" class="btn btn-danger" >Yes, i do</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-danger" >ยืนยัน</button>
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@ $(document).ready(function() {
 
 function add_item(){
     $('form#input').attr('action', '<?php echo base_url();?>index.php/C_Shopping/insert_item');
-    $('erre')
+    $('.modal-title').html('เพิ่ม Item');
     console.log('insert');
 }
 
@@ -194,6 +194,7 @@ function edit_item(id){
     $('#quota').val($('#item_'+id+' div div div .item-quota').text());
     $('#price').val($('#item_'+id+' div div div .item-price').text());
     $('#type').val($('#item_'+id+' div .item-type').text());
+    $('.modal-title').html('แก้ไข Item');
     console.log(type);
 }
 

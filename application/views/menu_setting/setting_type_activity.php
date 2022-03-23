@@ -26,7 +26,7 @@ td {
         <table class="ui celled table">
             <thead>
                 <tr>
-                    <th class="center aligned">ชื่อ Activities</th>
+                    <th class="center aligned">ประเภท Activity</th>
                     <th class="center aligned"></th>
                 </tr>
             </thead>
