@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <?php if($_SESSION['user']->role == 'admin'){ ?>
-                    <img class="ui avatar image" src="https://cdn-icons.flaticon.com/png/512/3093/premium/3093000.png?token=exp=1647829854~hmac=5a2451aa5b3e50eb7632e4544234ebeb" style="background-color: white;">
+                    <img class="ui avatar image" src="https://img.icons8.com/material-sharp/344/admin-settings-male.png" style="background-color: white;">
                 <?php } else{ ?>
                     <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">
                 <?php } ?>
