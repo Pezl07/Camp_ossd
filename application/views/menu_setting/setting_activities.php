@@ -97,7 +97,7 @@ td {
                             onclick="edit_row('<?php echo $activity->_id ?>')">
                             <i class="edit outline icon"></i></button>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity->_id ?>')">
+                            data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity->_id ?>', '<?php echo $activity->type ?>', '<?php echo $activity->date ?>')">
                             <i class="trash alternate outline icon"></i></button>
                     </td>
                 </tr>
@@ -114,12 +114,14 @@ td {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center py-5">
-                    <h1 style="font-weight: bold; font-size: 50px !important"> Delete ? </h1>
+                    <h1 style="font-weight: bold; font-size: 50px !important"> ยืนยันการลบ </h1>
                     <input type="hidden" name="delete_id" id="delete_id" hidden="true">
+                    <input type="hidden" name="type_name" id="type_name" hidden="true">
+                    <input type="hidden" name="date" id="date" hidden="true">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, i don't</button>
-                    <button type="submit" class="btn btn-danger">Yes, i do</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-danger">ยืนยัน</button>
                 </div>
             </div>
         </div>
@@ -332,7 +334,9 @@ function cancel_edit_row(ac_id) {
     $('form#input').attr('action', '');
 }
 
-function get_id_delete(ac_id) {
+function get_id_delete(ac_id, type_name, date) {
     $('#delete_id').val(ac_id);
+    $('#type_name').val(type_name);
+    $('#date').val(date);
 }
 </script>

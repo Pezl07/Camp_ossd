@@ -194,9 +194,9 @@
                     </div>
                 </div>
                 <?php if($_SESSION['user']->role == 'admin'){ ?>
-                    <img class="ui avatar image" src="https://img.icons8.com/material-sharp/344/admin-settings-male.png" style="background-color: white;">
+                    <img class="ui avatar image" src="https://cdn-icons-png.flaticon.com/512/1320/1320457.png" style="background-color: white;">
                 <?php } else{ ?>
-                    <img class="ui avatar image" src="https://semantic-ui.com/images/wireframe/square-image.png">
+                    <img class="ui avatar image" src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/anime_spirited_away_no_face_nobody-512.png">
                 <?php } ?>
                 <div class="btn-logout text-center transition hidden">
                     <a class="ui red button m-0" href="<?= base_url(); ?>index.php/C_Login/logout"> LOGOUT </a>

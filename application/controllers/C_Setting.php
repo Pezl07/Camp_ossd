@@ -51,21 +51,24 @@ class C_Setting extends Camp_controller {
 		$obj_ac = $this->input->post();
 		// print_r($obj_ac);
 		$this->M_activity->insert($obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['date'], $obj_ac['max_score']);
-		redirect('/C_Setting/show_setting/2');
+		$type = $this->M_activity_type->get_activity_type_by_name($obj_ac['ac_type']);
+		redirect('/C_Setting/show_setting/2/'.$type->_id.'/'.$obj_ac['date']);
 	}
 
 	function edit_activity(){
 		$obj_ac = $this->input->post();
 		// print_r($obj_ac);
 		$this->M_activity->update($obj_ac['id'], $obj_ac['ac_name'], $obj_ac['ac_type'], $obj_ac['max_score']);
-		redirect('/C_Setting/show_setting/2');
+		$type = $this->M_activity_type->get_activity_type_by_name($obj_ac['ac_type']);
+		redirect('/C_Setting/show_setting/2/'.$type->_id.'/'.$obj_ac['date']);
 	}
 
 	function delete_activity(){
 		$obj_ac = $this->input->post();
 		// print_r($obj_ac);
 		$this->M_activity->delete($obj_ac['delete_id']);
-		redirect('/C_Setting/show_setting/2');
+		$type = $this->M_activity_type->get_activity_type_by_name($obj_ac['type_name']);
+		redirect('/C_Setting/show_setting/2/'.$type->_id.'/'.$obj_ac['date']);
 	}
 
 	function insert_activity_type(){

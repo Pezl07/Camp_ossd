@@ -37,4 +37,21 @@ class M_activity_type extends Da_activity_type {
 		}
 	}
 
+	function get_activity_type_by_name($type_name) {
+		try {
+			$filter = ['type_name' => $type_name];
+			$query = new MongoDB\Driver\Query($filter);
+
+			$result = $this->conn->executeQuery($this->database.'.'.$this->collection, $query);
+
+			foreach($result as $activity_type) {
+				return $activity_type;
+			}
+
+			return NULL;
+		} catch(MongoDB\Driver\Exception\RuntimeException $ex) {
+			show_error('Error while fetching activity_type: ' . $ex->getMessage(), 500);
+		}
+	}
+
 }
