@@ -151,7 +151,7 @@
             </h5>
         </a>
 
-        <?php if($_SESSION['user']->role == 'admin'|| $_SESSION['user']->role == 'พี่เลี้ยง'){ ?>
+        <?php if($_SESSION['user']->role == 'พี่เลี้ยง'){ ?>
 
         <a class="item" href="<?= base_url(); ?>index.php/C_Assess/show_assess">
             <h5>
