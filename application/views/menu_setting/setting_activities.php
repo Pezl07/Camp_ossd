@@ -2,6 +2,7 @@
 .max-score-ac .input input {
     width: 200px;
 }
+
 table {
     background-color: #810000 !important;
     border-radius: 15px !important;
@@ -24,34 +25,36 @@ td {
 
 <div class="div">
     <select class="ui dropdown type_id">
-        <option value="ALL" <?php if($type_id == "ALL") {echo "selected";}; ?>>ALL</option>
-        <?php foreach ($activity_types as $activity_type){ ?>
-        <option value="<?php echo $activity_type->_id ?>"
-            <?php if($type_id == $activity_type->type_name) {echo "selected";}; ?>>
+        <option value="ALL" <?php if ($type_id == "ALL") {echo "selected";}
+;?>>ALL</option>
+        <?php foreach ($activity_types as $activity_type) {?>
+        <option value="<?php echo $activity_type->_id ?>" <?php if ($type_id == $activity_type->type_name) {echo "selected";}
+    ;?>>
             <?php echo $activity_type->type_name ?>
         </option>
-        <?php } ?>
+        <?php }?>
     </select>
 
     <select class="ui dropdown day">
-        <?php for($i = 7; $i <= 14; $i++){ ?>
-        <?php if($i < 10){ ?>
-        <option value="2022-04-0<?php echo $i ?>"
-            <?php if(isset($day) && $day == "2022-04-0".$i) {echo "selected";}; ?>>
+        <?php for ($i = 7; $i <= 14; $i++) {?>
+        <?php if ($i < 10) {?>
+        <option value="2022-04-0<?php echo $i ?>" <?php if (isset($day) && $day == "2022-04-0" . $i) {echo "selected";}
+    ;?>>
             วันที่ <?php echo $i ?> เมษายน 2565
         </option>
-        <?php }else{ ?>
-        <option value="2022-04-<?php echo $i ?>" <?php if(isset($day) && $day == "2022-04-".$i) {echo "selected";}; ?>>
+        <?php } else {?>
+        <option value="2022-04-<?php echo $i ?>" <?php if (isset($day) && $day == "2022-04-" . $i) {echo "selected";}
+    ;?>>
             วันที่ <?php echo $i ?> เมษายน 2565
         </option>
-        <?php } ?>
+        <?php }?>
 
-        <?php } ?>
+        <?php }?>
     </select>
 
 </div>
 
-<?php $count = 0; ?>
+<?php $count = 0;?>
 
 <div class="rate-form mt-4">
     <form action="" enctype="multipart/form-data" method="POST" id="input">
@@ -60,9 +63,9 @@ td {
                 <tr>
                     <th class="center aligned">ชื่อ Activities</th>
 
-                    <?php if($type_id == 'ALL'){ ?>
+                    <?php if ($type_id == 'ALL') {?>
                     <th class="center aligned" style="width: 30%">ประเภท</th>
-                    <?php } ?>
+                    <?php }?>
 
                     <th class="center aligned">คะแนนเต็ม</th>
                     <th class="center aligned"></th>
@@ -77,7 +80,7 @@ td {
                         </div>
                     </td>
 
-                    <?php if($type_id == 'ALL'){ ?>
+                    <?php if ($type_id == 'ALL') {?>
 
                     <td class="center aligned type">
                         <div class="type-ac">
@@ -85,7 +88,7 @@ td {
                         </div>
                     </td>
 
-                    <?php } ?>
+                    <?php }?>
 
                     <td class="center aligned score">
                         <div class="max-score-ac">
@@ -97,11 +100,12 @@ td {
                             onclick="edit_row('<?php echo $activity->_id ?>')">
                             <i class="edit outline icon"></i></button>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity->_id ?>', '<?php echo $activity->type ?>', '<?php echo $activity->date ?>')">
+                            data-bs-target="#deleteModal"
+                            onclick="get_id_delete('<?php echo $activity->_id ?>', '<?php echo $activity->type ?>', '<?php echo $activity->date ?>')">
                             <i class="trash alternate outline icon"></i></button>
                     </td>
                 </tr>
-                <?php $count++; } ?>
+                <?php $count++;}?>
             </tbody>
         </table>
 
@@ -110,19 +114,27 @@ td {
 
 <form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity" enctype="multipart/form-data" method="POST"
     id="delete">
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body text-center py-5">
-                    <h1 style="font-weight: bold; font-size: 50px !important"> ยืนยันการลบ </h1>
-                    <input type="hidden" name="delete_id" id="delete_id" hidden="true">
-                    <input type="hidden" name="type_name" id="type_name" hidden="true">
-                    <input type="hidden" name="date" id="date" hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" class="btn btn-danger">ยืนยัน</button>
-                </div>
+                <form action="" class="ui form" enctype="multipart/form-data" method="POST" id="input">
+                    <input type="text" hidden id="item_id" value="" name="item_id">
+                    <div class="modal-body">
+                        <h1 style="font-weight: bold; font-size: 50px !important" class="text-center"> ยืนยันการลบ </h1>
+                        <input type="hidden" name="delete_id" id="delete_id" hidden="true">
+                        <input type="hidden" name="type_name" id="type_name" hidden="true">
+                        <input type="hidden" name="date" id="date" hidden="true">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="location.reload();">ยกเลิก</button>
+                        <button type="submit" class="btn btn-danger">ยืนยัน</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -159,9 +171,9 @@ $(document).ready(function() {
         }
     });
     get_types();
-    <?php if($count == 0){ ?>
+    <?php if ($count == 0) {?>
     $('.ui.blue.button').click();
-    <?php } ?>
+    <?php }?>
 });
 
 $('.type_id, .day').on('change', function() {
@@ -199,10 +211,10 @@ function add_row() {
                                     <input type="text" placeholder="ชื่อ Activity" id="ac_name" name="ac_name" required>
                                 </div>
                             </div>
-                        </td> 
+                        </td>
                 `;
 
-    <?php if($type_id == 'ALL'){ ?>
+    <?php if ($type_id == 'ALL') {?>
 
     input += `<td class="center aligned type" >
                     <div class="type-ac">
@@ -220,11 +232,11 @@ function add_row() {
     input += `</select>
                     </div>
                 </td> `;
-    <?php }else{ ?>
+    <?php } else {?>
 
     input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`
 
-    <?php } ?>
+    <?php }?>
 
     input += `
                     <td class="center aligned score">
@@ -263,10 +275,10 @@ function edit_row(ac_id) {
     var name_ac = $('#ac_' + ac_id + ' td .name-ac')[0].innerText;
     var max_score = $('#ac_' + ac_id + ' td .max-score-ac')[0].innerText;
 
-    <?php if($type_id == 'ALL'){ ?>
+    <?php if ($type_id == 'ALL') {?>
     var type_ac = $('#ac_' + ac_id + ' td .type-ac')[0].innerText;
     console.log(max_score);
-    <?php } ?>
+    <?php }?>
 
 
     $('form#input').attr('action', '<?php echo base_url(); ?>index.php/C_Setting/edit_activity');
@@ -281,7 +293,7 @@ function edit_row(ac_id) {
                         </div>
                     </td>`;
 
-    <?php if($type_id == 'ALL'){ ?>
+    <?php if ($type_id == 'ALL') {?>
     input += `<td class="center aligned type" >
                     <div class="type-ac">
                         <select class="ui dropdown type_id" style="width: 100%; height: 100%" id="ac_type" name="ac_type" required>
@@ -303,13 +315,13 @@ function edit_row(ac_id) {
     input += `</select>
                         </div>
                     </td> `;
-    <?php }else{ ?>
+    <?php } else {?>
 
     input += `<td hidden="true"><input id="ac_type" name="ac_type" value="${'<?php echo $type_id ?>'}"></td>`;
 
-    <?php } ?>
+    <?php }?>
 
-    input += `                
+    input += `
                     <td class="center aligned score">
                         <div class="max-score-ac">
                             <div class="ui input">

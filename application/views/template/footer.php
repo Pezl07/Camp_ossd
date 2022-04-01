@@ -17,7 +17,6 @@ $('button[data-bs-dismiss="modal"]').on('click', function() {
     location.reload();
 });
 
-
 </script>
 
 </body>

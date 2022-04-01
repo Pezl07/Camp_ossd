@@ -1,8 +1,8 @@
 <style>
 table {
-background-color: #810000 !important;
-border-radius: 15px !important;
-padding-bottom: 50px !important;
+    background-color: #810000 !important;
+    border-radius: 15px !important;
+    padding-bottom: 50px !important;
 }
 
 td {
@@ -19,7 +19,7 @@ td {
     </div>
 </div>
 
-<?php $count = 0; ?>
+<?php $count = 0;?>
 
 <div class="rate-form">
     <form action="" enctype="multipart/form-data" method="POST" id="input">
@@ -32,8 +32,8 @@ td {
             </thead>
 
             <tbody>
-                <?php foreach($activity_types as $activity_type){ ?>
-                <?php if($activity_type->type_name != 'Admin') { ?>
+                <?php foreach ($activity_types as $activity_type) {?>
+                <?php if ($activity_type->type_name != 'Admin') {?>
                 <tr id="ac_<?php echo $activity_type->_id ?>">
                     <td class="center aligned">
                         <div class="name-ac">
@@ -44,38 +44,46 @@ td {
                         <button class="btn btn-warning" onclick="edit_row('<?php echo $activity_type->_id ?>')"
                             type="button">
                             <i class="edit outline icon"></i></button>
-                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" 
+                        <button class="btn btn-danger" type="button" data-bs-toggle="modal"
                             data-bs-target="#deleteModal" onclick="get_id_delete('<?php echo $activity_type->_id ?>')">
                             <i class="trash alternate outline icon"></i></button>
                     </td>
                 </tr>
-                <?php } ?>
-                <?php $count++; } ?>
+                <?php }?>
+                <?php $count++;}?>
             </tbody>
         </table>
 
     </form>
 </div>
 
-<form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity_type" enctype="multipart/form-data" method="POST" id="delete">
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<form action="<?php echo base_url(); ?>index.php/C_Setting/delete_activity_type" enctype="multipart/form-data"
+    method="POST" id="delete">
+    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body text-center py-5">
-                    <h1 style="font-weight: bold; font-size: 50px !important"> ยืนยันการลบ </h1>
-                    <input type="hidden" name="delete_id" id="delete_id" hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" class="btn btn-danger" >ยืนยัน</button>
-                </div>
+                <form action="" class="ui form" enctype="multipart/form-data" method="POST" id="input">
+                    <input type="text" hidden id="item_id" value="" name="item_id">
+                    <div class="modal-body">
+                        <h1 style="font-weight: bold; font-size: 50px !important" class="text-center"> ยืนยันการลบ </h1>
+                        <input type="hidden" name="delete_id" id="delete_id" hidden="true">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            onclick="location.reload();">ยกเลิก</button>
+                        <button type="submit" class="btn btn-danger">ยืนยัน</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </form>
 
 <script>
-
 $(document).ready(function() {
     $("form").validate({
         errorClass: "error fail-alert",
@@ -92,9 +100,9 @@ $(document).ready(function() {
         }
     });
 
-    <?php if($count <= 1){ ?>
-        $('.ui.blue.button').click();
-    <?php } ?>
+    <?php if ($count == 0) {?>
+    $('.ui.blue.button').click();
+    <?php }?>
 });
 
 function add_row() {

@@ -6,28 +6,28 @@
     </div>
 </div>
 
-<?php $count = 0 ?>
+<?php $count = 0?>
 
 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-    <?php foreach ($items as $item){ ?>
+    <?php foreach ($items as $item) {?>
     <div class="col mb-5" id="item_<?php echo $item->_id ?>">
         <div class="card h-100">
             <!-- Sale badge-->
             <div class="badge bg-dark text-white position-absolute item-type" style="top: 0.5rem; right: 0.5rem"><?php echo $item->type ?></div>
             <!-- Product image-->
 
-            <?php if($item->type == 'ขอความช่วยเหลือ'){ ?>
+            <?php if ($item->type == 'ขอความช่วยเหลือ') {?>
             <img class="card-img-top"
                 src="https://image.bangkokbiznews.com/image/kt/media/image/fileupload/source/niti/03042561/1_148.jpg"
                 alt="...">
 
-            <?php }elseif($item->type == 'โจมตี'){ ?>
+            <?php } elseif ($item->type == 'โจมตี') {?>
             <img class="card-img-top" src="https://www.matichon.co.th/wp-content/uploads/2017/01/2-69.jpg" alt="...">
 
-            <?php }else if($item->type == 'ป้องกัน'){ ?>
+            <?php } else if ($item->type == 'ป้องกัน') {?>
             <img class="card-img-top" src="https://www.matichon.co.th/wp-content/uploads/2018/05/DSC_4708.jpg"
                 alt="...">
-            <?php } ?>
+            <?php }?>
 
             <!-- Product details-->
             <div class="card-body p-4">
@@ -39,17 +39,17 @@
                     $ <span class="item-price"><?php echo $item->price ?></span>
                 </div>
             </div>
-            <?php if($_SESSION['user']->role == 'หัวหน้า'){ ?>
+            <?php if ($_SESSION['user']->role == 'หัวหน้า') {?>
             <!-- Product actions-->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center"><a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                        class="btn btn-danger mt-auto <?php if($team->score < $item->price) echo "disabled" ?>"
-                        onclick="get_id('<?php echo $item->_id ?>')">Add to cart</a></div>
+                <div class="text-center"><button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                    class="btn btn-danger mt-auto <?php if ($team->score < $item->price) {echo "disabled";}?>"
+                    onclick="get_id('<?php echo $item->_id ?>')">Add to cart</button></div>
             </div>
-            <?php } ?>
+            <?php }?>
         </div>
     </div>
-    <?php $count++; } ?>
+    <?php $count++;}?>
 
 </div>
 
@@ -70,7 +70,7 @@
     </div>
 </div>
 
-<?php if($count == 0){ ?>
+<?php if ($count == 0) {?>
 <div class="ui message text-center">
     <div class="header">
         ไม่มีสินค้าในระบบ
@@ -82,7 +82,7 @@ table {
     display: none;
 }
 </style>
-<?php } ?>
+<?php }?>
 
 <script>
 function insert(id) {
