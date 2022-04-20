@@ -21,14 +21,16 @@ tspan {
         <select class="ui align-right search dropdown type_id">
             <option value="ALL">ALL</option>
 
-            <?php foreach ($activity_types as $activity_type){ ?>
+            <?php foreach ($activity_types as $activity_type) {?>
             <option value="<?php echo $activity_type->_id ?>"
-                <?php if(isset($type_id) && $type_id == $activity_type->_id) {echo "selected";}; ?>>
+                <?php if (isset($type_id) && $type_id == $activity_type->_id) {echo "selected";}
+    ;?>>
                 <?php echo $activity_type->type_name ?>
             </option>
-            <?php } ?>
+            <?php }?>
             <option value="Shopping"
-                <?php if(isset($type_id) && $type_id == "Shopping") {echo "selected";}; ?>>
+                <?php if (isset($type_id) && $type_id == "Shopping") {echo "selected";}
+;?>>
                 Shopping
             </option>
         </select>
@@ -46,9 +48,9 @@ tspan {
 
 <script>
 var h_screen = $(window).height() - 200;
-var gold_url = "<?= base_url() . "assets/img/gold_crown.png"?>"
-var sliver_url = "<?= base_url() . "assets/img/sliver_crown.png"?>"
-var bronze_url = "<?= base_url() . "assets/img/broezn_crown.png"?>"
+var gold_url = "<?=base_url() . "assets/img/gold_crown.png"?>"
+var sliver_url = "<?=base_url() . "assets/img/sliver_crown.png"?>"
+var bronze_url = "<?=base_url() . "assets/img/broezn_crown.png"?>"
 var default_formatter = {
     enabled: true,
     useHTML: true,
@@ -135,7 +137,7 @@ var bar_chart = Highcharts.chart('chart', {
         type: 'column'
     },
     title: {
-        text: 'Open Source Software Developers Camp #10'
+        text: 'Score of Open Source Software Developers Camp #10'
     },
     xAxis: {
         categories: [
@@ -163,7 +165,7 @@ var bar_chart = Highcharts.chart('chart', {
     yAxis: {
         min: 0,
         title: {
-            text: 'คะแนน'
+            text: 'จำนวนเงิน $SE'
         },
     },
     tooltip: {

@@ -6,10 +6,10 @@
     </div>
 </div>
 
-<?php $count = 0 ?>
+<?php $count = 0?>
 
 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-    <?php foreach ($items as $item){ ?>
+    <?php foreach ($items as $item) {?>
 
     <div class="col mb-5" id="item_<?php echo $item->_id ?>">
         <div class="card h-100">
@@ -18,29 +18,31 @@
                 <?php echo $item->type ?></div>
             <!-- Product image-->
 
-            <?php if($item->type == 'ขอความช่วยเหลือ'){ ?>
+            <?php if ($item->type == 'ขอความช่วยเหลือ') {?>
             <img class="card-img-top"
-                src="https://image.bangkokbiznews.com/image/kt/media/image/fileupload/source/niti/03042561/1_148.jpg"
+                src="https://cdn-icons-png.flaticon.com/512/682/682055.png"
                 alt="...">
 
-            <?php }elseif($item->type == 'โจมตี'){ ?>
-            <img class="card-img-top" src="https://www.matichon.co.th/wp-content/uploads/2017/01/2-69.jpg" alt="...">
+            <?php } elseif ($item->type == 'โจมตี') {?>
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1496/1496059.png" alt="...">
 
-            <?php }else if($item->type == 'ป้องกัน'){ ?>
-            <img class="card-img-top" src="https://www.matichon.co.th/wp-content/uploads/2018/05/DSC_4708.jpg"
+            <?php } else if ($item->type == 'ป้องกัน') {?>
+            <img class="card-img-top" src="https://icons-for-free.com/iconfiles/png/512/protect-1324760613746387702.png"
                 alt="...">
-            <?php } ?>
+            <?php }?>
 
             <!-- Product details-->
             <div class="card-body p-4">
                 <div class="text-center">
                     <!-- Product name-->
                     <h5 class="fw-bolder item-name">
-                        <?php 
-                        echo $item->item;
-                        if($_SESSION['user']->role == 'admin')
-                            echo ' (team'.$item->team.')';
-                        ?>
+                        <?php
+echo $item->item;
+    if ($_SESSION['user']->role == 'admin') {
+        echo ' (team' . $item->team . ')';
+    }
+
+    ?>
                     </h5>
                     <!-- Product price-->
                     $ <span class="item-price"> <?php echo $item->price ?> </span>
@@ -49,11 +51,11 @@
 
         </div>
     </div>
-    <?php $count++; } ?>
+    <?php $count++;}?>
 
 </div>
 
-<?php if($count == 0){ ?>
+<?php if ($count == 0) {?>
     <div class="ui message text-center">
         <div class="header">
             ไม่มีการสั่งซื้อสินค้าในระบบ
@@ -65,4 +67,4 @@
         display: none;
     }
     </style>
-<?php } ?>
+<?php }?>

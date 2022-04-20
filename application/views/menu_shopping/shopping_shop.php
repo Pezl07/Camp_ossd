@@ -18,14 +18,14 @@
 
             <?php if ($item->type == 'ขอความช่วยเหลือ') {?>
             <img class="card-img-top"
-                src="https://image.bangkokbiznews.com/image/kt/media/image/fileupload/source/niti/03042561/1_148.jpg"
+                src="https://cdn-icons-png.flaticon.com/512/682/682055.png"
                 alt="...">
 
             <?php } elseif ($item->type == 'โจมตี') {?>
-            <img class="card-img-top" src="https://www.matichon.co.th/wp-content/uploads/2017/01/2-69.jpg" alt="...">
+            <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1496/1496059.png" alt="...">
 
             <?php } else if ($item->type == 'ป้องกัน') {?>
-            <img class="card-img-top" src="https://www.matichon.co.th/wp-content/uploads/2018/05/DSC_4708.jpg"
+            <img class="card-img-top" src="https://icons-for-free.com/iconfiles/png/512/protect-1324760613746387702.png"
                 alt="...">
             <?php }?>
 
